@@ -1,3 +1,3 @@
 # In Progress...
 **`Just a few words about new app.`**\
-That is simple CV application. You can easly update your CV application with relevant data. 
+Application CV - it's good application will help you create awesome CV and keep all time updated with relevant data.
