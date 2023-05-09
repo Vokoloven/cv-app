@@ -1,6 +1,3 @@
 #In Progress...
-```
-body {
-  font-size: 100%;
-}
-```
+
+Just a few words about that app.
