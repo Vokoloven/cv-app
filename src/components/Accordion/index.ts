@@ -1,4 +1,4 @@
-import { CustomizedAccordions } from './Accordions'
-import { CustomizedAccordion } from './Accordion'
+import { CustomizedAccordionItem } from './CustomizedAccordionItem';
+import { CustomizedAccordion } from './CustomizedAccordion';
 
-export { CustomizedAccordions, CustomizedAccordion }
+export { CustomizedAccordionItem, CustomizedAccordion };

@@ -1,9 +1,9 @@
-import Container from '@mui/material/Container'
-import { Aside } from 'components/Aside/Aside'
-import { ResponsiveAppBar } from 'components/AppBar/AppBar'
-import { BoxWrapper } from 'components/BoxWrapper'
-import { Photo } from 'components/Photo/Photo'
-import { CustomizedAccordions } from 'components/Accordion'
+import Container from '@mui/material/Container';
+import { Aside } from 'components/Aside/Aside';
+import { ResponsiveAppBar } from 'components/AppBar/AppBar';
+import { BoxWrapper } from 'components/BoxWrapper';
+import { Photo } from 'components/Photo/Photo';
+import { CustomizedAccordion } from 'components/Accordion';
 
 export const Home = () => {
     return (
@@ -22,11 +22,11 @@ export const Home = () => {
             <BoxWrapper side={'left'}>
                 <Aside />
                 <Photo />
-                <CustomizedAccordions />
+                <CustomizedAccordion />
             </BoxWrapper>
             <BoxWrapper side={'right'}>
                 <ResponsiveAppBar side={'right'} />
             </BoxWrapper>
         </Container>
-    )
-}
+    );
+};

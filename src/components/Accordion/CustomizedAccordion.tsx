@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { CustomizedAccordion } from './Accordion';
+import { CustomizedAccordionItem } from './CustomizedAccordionItem';
 import { AddContacts } from './AddSkills/Contacts/AddContacts';
 import { AddTechSkills } from './AddSkills/TechSkills/AddTechSkills';
 import { AddSoftSkills } from './AddSkills/SoftSkills/AddSoftSkills';
 import { AddLanguages } from './AddSkills/AddLanguages/AddLanguages';
+import { useSelector } from 'react-redux';
+import { selectAuth } from 'redux/authSlice';
 
 type TItem<T, U> = {
     value: T;
@@ -72,19 +75,30 @@ const childrenHandler = (value: TValue) => {
     }
 };
 
-export function CustomizedAccordions() {
-    const [expanded, setExpanded] = React.useState<string | false>('contacts');
+export function CustomizedAccordion() {
+    const [expanded, setExpanded] = useState<string | false>(false);
+    const { access } = useSelector(selectAuth);
+
+    useEffect(() => {
+        if (access !== 0) {
+            setExpanded(false);
+        }
+    }, [access]);
 
     const handleChange =
         (panel: string) =>
         (_event: React.SyntheticEvent, newExpanded: boolean) => {
+            if (access !== 0) {
+                return;
+            }
+
             setExpanded(newExpanded ? panel : false);
         };
 
     return (
         <Box sx={{ mt: 2 }}>
             {items.map(({ value, title }) => (
-                <CustomizedAccordion
+                <CustomizedAccordionItem
                     key={value}
                     expanded={expanded}
                     handleChange={handleChange}
@@ -92,7 +106,7 @@ export function CustomizedAccordions() {
                     title={title}
                 >
                     {childrenHandler(value)}
-                </CustomizedAccordion>
+                </CustomizedAccordionItem>
             ))}
         </Box>
     );

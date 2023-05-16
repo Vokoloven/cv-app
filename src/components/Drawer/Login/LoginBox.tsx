@@ -11,7 +11,6 @@ type TOnclickHandler = {
 };
 
 export const LoginBox = ({ onClickHandler, loading }: TOnclickHandler) => {
-    console.log(loading);
     return (
         <>
             <Typography

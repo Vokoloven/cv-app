@@ -39,6 +39,8 @@ export const userAuthSlice = createSlice({
         builder.addCase(loginUserByGoogle.fulfilled, (state, { payload }) => {
             if (payload.user?.email === ADMIN) {
                 state.access = Access.ADMIN;
+            } else {
+                state.access = Access.USER;
             }
             state.user = payload.user;
             state.token = payload.token;
@@ -55,6 +57,7 @@ export const userAuthSlice = createSlice({
             state.loading = 'pending';
         });
         builder.addCase(logoutUserByGoogle.fulfilled, (state, { payload }) => {
+            state.access = Access.USER;
             state.user = null;
             state.token = null;
             state.authorized = payload;

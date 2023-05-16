@@ -55,7 +55,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export const CustomizedAccordion = ({
+export const CustomizedAccordionItem = ({
     expanded,
     handleChange,
     value,
@@ -63,10 +63,7 @@ export const CustomizedAccordion = ({
     children,
 }: TAccordion) => {
     return (
-        <Accordion
-            expanded={expanded === `${value}`}
-            onChange={handleChange(`${value}`)}
-        >
+        <Accordion expanded={expanded === value} onChange={handleChange(value)}>
             <AccordionSummary
                 aria-controls={`${value}-content`}
                 id={`${value}-header`}
