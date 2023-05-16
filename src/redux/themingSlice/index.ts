@@ -1,3 +1,7 @@
-import { themingSlice, persistedThemingReducer } from './themingSlice'
+import {
+    themingSlice,
+    persistedThemingReducer,
+    colorModeSwitcher,
+} from './themingSlice'
 
-export { themingSlice, persistedThemingReducer }
+export { themingSlice, persistedThemingReducer, colorModeSwitcher }
