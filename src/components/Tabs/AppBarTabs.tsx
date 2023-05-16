@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 export const AppBarTabs = () => {
-    const [value, setValue] = useState<string>('Home')
-    const pages: Readonly<string[]> = ['Home', 'Projects']
+    const [value, setValue] = useState<string>('Home');
+    const pages: Readonly<string[]> = ['Home', 'Projects'];
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue)
-    }
+    const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -38,5 +38,5 @@ export const AppBarTabs = () => {
                 ))}
             </Tabs>
         </Box>
-    )
-}
+    );
+};
