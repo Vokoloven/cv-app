@@ -42,6 +42,8 @@ export const getDesignTokens = (mode: TColorMode) => ({
                               primary: '#fff',
                               complementary: '#121212',
                           },
+                          linearGradient:
+                              '(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
                       },
                       typography: {
                           text: {
@@ -79,6 +81,8 @@ export const getDesignTokens = (mode: TColorMode) => ({
                               primary: '#fff',
                               complementary: '#121212',
                           },
+                          linearGradient:
+                              '(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
                       },
                       typography: {
                           text: {

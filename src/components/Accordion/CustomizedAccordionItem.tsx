@@ -51,7 +51,7 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
@@ -77,7 +77,7 @@ export const CustomizedAccordionItem = ({
                               backgroundColor:
                                   'primary.background.triadic.complementary',
                               backgroundImage:
-                                  'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+                                  'primary.background.linearGradient',
                           }),
                 })}
             >

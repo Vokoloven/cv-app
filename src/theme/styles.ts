@@ -41,4 +41,4 @@ export const styles = {
         listStyle: 'none',
         padding: 0,
     },
-}
+};

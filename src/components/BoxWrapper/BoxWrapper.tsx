@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box'
-import { TAppBar, TChildren } from 'types/globalTypes'
+import Box from '@mui/material/Box';
+import { TAppBar, TChildren } from 'types/globalTypes';
 
-type TProps = TAppBar & TChildren
+type TProps = TAppBar & TChildren;
 
 export const BoxWrapper = ({ children, side }: TProps) => {
     return (
@@ -29,5 +29,5 @@ export const BoxWrapper = ({ children, side }: TProps) => {
         >
             {children}
         </Box>
-    )
-}
+    );
+};
