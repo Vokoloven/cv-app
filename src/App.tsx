@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { getDesignTokens } from 'theme/theme';
 import { Home } from 'pages/Home';
 import { Projects } from 'pages/Projects';
+import { SharedLayout } from 'pages/SharedLayout';
 
 export const App = () => {
     const { colorMode } = useSelector(selectTheming);
@@ -22,9 +23,10 @@ export const App = () => {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {appGlobalStyles}
-
                 <Routes>
-                    <Route path={'/'} element={<Home />} />
+                    <Route path={'/'} element={<SharedLayout />}>
+                        <Route index element={<Home />} />
+                    </Route>
                     <Route path={'projects'} element={<Projects />} />
                 </Routes>
             </ThemeProvider>
