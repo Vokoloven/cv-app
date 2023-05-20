@@ -8,7 +8,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { getDesignTokens } from 'theme/theme';
 import { Home } from 'pages/Home';
 import { Projects } from 'pages/Projects';
-import Container from '@mui/material/Container';
 
 export const App = () => {
     const { colorMode } = useSelector(selectTheming);
