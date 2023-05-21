@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import { BoxWrapper } from 'components/BoxWrapper';
 import { Photo } from 'components/Photo/Photo';
 import { CustomizedAccordion } from 'components/Accordion';
+import { SpeedDialTooltipOpen } from 'components/SpeedDial';
 
 export const Home = () => {
     return (
@@ -12,14 +13,7 @@ export const Home = () => {
             </BoxWrapper>
             <BoxWrapper side={'right'}>
                 <Box sx={{ mt: 2 }}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam eum soluta est illo ipsa esse. Quam, qui laudantium
-                    amet nobis ipsam, est tempore, necessitatibus deserunt quia
-                    rerum reprehenderit suscipit numquam. Lorem ipsum dolor sit
-                    amet, consectetur adipisicing elit. Unde saepe non
-                    voluptatibus, excepturi reprehenderit culpa vel laborum
-                    inventore? Doloremque inventore eos neque nam eveniet
-                    aliquid tempore maxime doloribus alias amet.
+                    <SpeedDialTooltipOpen />
                 </Box>
             </BoxWrapper>
         </Box>

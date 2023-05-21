@@ -4,6 +4,7 @@ import { BoxWrapper } from 'components/BoxWrapper';
 import { Aside } from 'components/Aside/Aside';
 import { ResponsiveAppBar } from 'components/AppBar/AppBar';
 import { Outlet } from 'react-router-dom';
+import { SpeedDialTooltipOpen } from 'components/SpeedDial';
 
 export const SharedLayout = () => {
     return (

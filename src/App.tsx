@@ -26,8 +26,9 @@ export const App = () => {
                 <Routes>
                     <Route path={'/'} element={<SharedLayout />}>
                         <Route index element={<Home />} />
+                        <Route path={'projects'} element={<Projects />} />
+                        <Route path={'*'} element={<Home />} />
                     </Route>
-                    <Route path={'projects'} element={<Projects />} />
                 </Routes>
             </ThemeProvider>
         </>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -6,6 +7,7 @@ import Tab from '@mui/material/Tab';
 export const AppBarTabs = () => {
     const [value, setValue] = useState<string>('Home');
     const pages: Readonly<string[]> = ['Home', 'Projects'];
+    const navigate = useNavigate();
 
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -25,6 +27,9 @@ export const AppBarTabs = () => {
             >
                 {pages.map((item) => (
                     <Tab
+                        onClick={() =>
+                            navigate(item === 'Home' ? '/' : item.toLowerCase())
+                        }
                         key={item}
                         value={item}
                         label={item}

@@ -76,8 +76,7 @@ export const CustomizedAccordionItem = ({
                         : {
                               backgroundColor:
                                   'primary.background.triadic.complementary',
-                              backgroundImage:
-                                  'primary.background.linearGradient',
+                              backgroundImage: `${theme.palette.primary.background.linearGradient}`,
                           }),
                 })}
             >
