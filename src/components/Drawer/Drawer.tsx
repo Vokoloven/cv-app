@@ -50,14 +50,7 @@ export function TemporaryDrawer() {
 
     return (
         <Box>
-            <Tooltip
-                title={'Settings'}
-                sx={{
-                    '.MuiTooltip-popper': {
-                        backdropFilter: 'tomato',
-                    },
-                }}
-            >
+            <Tooltip title={'Settings'}>
                 <IconButton
                     aria-label="settings"
                     onClick={toggleDrawer('right', true)}

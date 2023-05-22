@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Backdrop from '@mui/material/Backdrop';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -24,7 +23,20 @@ export function SpeedDialTooltipOpen() {
     const handleClose = () => setOpen(false);
 
     return (
-        <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }}>
+        <Box
+            sx={(theme) => ({
+                position: 'absolute',
+                right: 0,
+                top: '100px',
+
+                height: 330,
+                transform: 'translateZ(0px)',
+                flexGrow: 1,
+                [theme.breakpoints.down('tablet')]: {
+                    display: 'none',
+                },
+            })}
+        >
             <SpeedDial
                 ariaLabel="SpeedDial tooltip example"
                 sx={sxSpeedDial()}

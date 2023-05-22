@@ -2,9 +2,6 @@ import { Theme } from '@mui/material/styles';
 
 export const sxSpeedDial = () => {
     return (theme: Theme) => ({
-        position: 'absolute',
-        bottom: 16,
-        right: 16,
         '& 	.MuiSpeedDial-fab': {
             ...(theme.palette.mode === 'light'
                 ? {
@@ -33,9 +30,8 @@ export const sxSpeedDial = () => {
                   }
                 : {
                       color: `${theme.palette.primary.button.primary}`,
-
                       '&:hover': {
-                          bgcolor: `${theme.palette.primary.button.analogous.primary}`,
+                          bgcolor: `${theme.palette.primary.button.primary}`,
                       },
                   }),
         },

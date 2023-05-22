@@ -6,11 +6,11 @@ import { CustomizedAccordion } from 'components/Accordion';
 export const Projects = () => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <BoxWrapper side={'left'}>
+            <BoxWrapper side={'left'} page={'projects'}>
                 <Photo />
                 <CustomizedAccordion />
             </BoxWrapper>
-            <BoxWrapper side={'right'}>
+            <BoxWrapper side={'right'} page={'projects'}>
                 <Box sx={{ mt: 2 }}>Projects</Box>
             </BoxWrapper>
         </Box>

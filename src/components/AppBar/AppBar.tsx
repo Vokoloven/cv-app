@@ -25,7 +25,7 @@ import { NavLink } from 'react-router-dom';
 
 const pages: Readonly<string[]> = ['Home', 'Projects'];
 
-export function ResponsiveAppBar({ side }: TAppBar) {
+export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const { width } = useWindowDimensions(getWindowDimension);
 
