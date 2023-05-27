@@ -43,7 +43,7 @@ export const getDesignTokens = (mode: TColorMode) => ({
                               complementary: '#121212',
                           },
                           linearGradient:
-                              '(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+                              'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
                       },
                       typography: {
                           text: {
@@ -82,7 +82,7 @@ export const getDesignTokens = (mode: TColorMode) => ({
                               complementary: '#121212',
                           },
                           linearGradient:
-                              '(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+                              'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
                       },
                       typography: {
                           text: {

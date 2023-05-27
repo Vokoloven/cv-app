@@ -9,6 +9,8 @@ import { Download } from './Download';
 import { Mode } from './Mode';
 import { Login } from './Login/Login';
 import { sxIconButtonColorSecondary } from 'theme/sxIconButtonColor';
+import Tooltip from '@mui/material/Tooltip';
+import { CustomToggleButton } from 'components/ToggleButton';
 
 type Anchor = 'right';
 
@@ -44,18 +46,21 @@ export function TemporaryDrawer() {
             <Login />
             <Download />
             <Mode />
+            <CustomToggleButton />
         </Box>
     );
 
     return (
         <Box>
-            <IconButton
-                aria-label="settings"
-                onClick={toggleDrawer('right', true)}
-                sx={sxIconButtonColorSecondary()}
-            >
-                <SettingsIcon />
-            </IconButton>
+            <Tooltip title={'Settings'}>
+                <IconButton
+                    aria-label="settings"
+                    onClick={toggleDrawer('right', true)}
+                    sx={sxIconButtonColorSecondary()}
+                >
+                    <SettingsIcon />
+                </IconButton>
+            </Tooltip>
             <Drawer
                 anchor={'right'}
                 open={state['right']}

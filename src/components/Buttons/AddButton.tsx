@@ -2,15 +2,35 @@ import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { TChildren } from 'types/globalTypes';
 
+type TName = 'add';
+
 type TProps = {
     ariaLabel: string;
+    iconName: TName;
+    action: 'tech' | 'soft' | 'languages';
 };
 
-type CombineProps = TChildren & TProps;
+type TCombineProps = TChildren & TProps;
 
-export const AddButton = ({ children, ariaLabel }: CombineProps) => {
+export const AddButton = ({
+    children,
+    ariaLabel,
+    iconName,
+    action,
+}: TCombineProps) => {
+    const iconsHandler = (iconName: TName) => {
+        switch (iconName) {
+            case 'add':
+                return <AddCircleOutlineIcon />;
+
+            default:
+                return;
+        }
+    };
+
     return (
         <Button
+            onClick={() => console.log(action)}
             aria-label={ariaLabel}
             sx={(theme) => ({
                 ...(theme.palette.mode === 'light'
@@ -33,7 +53,7 @@ export const AddButton = ({ children, ariaLabel }: CombineProps) => {
                           },
                       }),
             })}
-            endIcon={<AddCircleOutlineIcon />}
+            endIcon={iconsHandler(iconName)}
             variant="outlined"
         >
             {children}

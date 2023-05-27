@@ -8,6 +8,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { getDesignTokens } from 'theme/theme';
 import { Home } from 'pages/Home';
 import { Projects } from 'pages/Projects';
+import { SharedLayout } from 'pages/SharedLayout';
+import Container from '@mui/material/Container';
 
 export const App = () => {
     const { colorMode } = useSelector(selectTheming);
@@ -22,11 +24,27 @@ export const App = () => {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 {appGlobalStyles}
-
-                <Routes>
-                    <Route path={'/'} element={<Home />} />
-                    <Route path={'projects'} element={<Projects />} />
-                </Routes>
+                <Container
+                    maxWidth={'desktop'}
+                    sx={(theme) => ({
+                        display: 'flex',
+                        flexDirection: 'column',
+                        [theme.breakpoints.down('laptop')]: {
+                            justifyContent: 'center',
+                        },
+                        [theme.breakpoints.down('tablet')]: {
+                            padding: 0,
+                        },
+                    })}
+                >
+                    <Routes>
+                        <Route path={'/'} element={<SharedLayout />}>
+                            <Route index element={<Home />} />
+                            <Route path={'projects'} element={<Projects />} />
+                            <Route path={'*'} element={<Home />} />
+                        </Route>
+                    </Routes>
+                </Container>
             </ThemeProvider>
         </>
     );

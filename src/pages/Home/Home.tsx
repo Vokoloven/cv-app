@@ -1,32 +1,20 @@
-import Container from '@mui/material/Container';
-import { Aside } from 'components/Aside/Aside';
-import { ResponsiveAppBar } from 'components/AppBar/AppBar';
+import Box from '@mui/material/Box';
 import { BoxWrapper } from 'components/BoxWrapper';
 import { Photo } from 'components/Photo/Photo';
 import { CustomizedAccordion } from 'components/Accordion';
 
 export const Home = () => {
     return (
-        <Container
-            maxWidth={'desktop'}
-            sx={(theme) => ({
-                display: 'flex',
-                [theme.breakpoints.down('laptop')]: {
-                    justifyContent: 'center',
-                },
-                [theme.breakpoints.down('tablet')]: {
-                    padding: 0,
-                },
-            })}
-        >
-            <BoxWrapper side={'left'}>
-                <Aside />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <BoxWrapper side={'left'} page={'home'}>
                 <Photo />
                 <CustomizedAccordion />
             </BoxWrapper>
-            <BoxWrapper side={'right'}>
-                <ResponsiveAppBar side={'right'} />
+            <BoxWrapper side={'right'} page={'home'}>
+                <Box sx={{ mt: 2 }}>
+                    <Box>Home</Box>
+                </Box>
             </BoxWrapper>
-        </Container>
+        </Box>
     );
 };

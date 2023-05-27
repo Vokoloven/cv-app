@@ -21,10 +21,11 @@ import {
     sxIconButtonColorSecondary,
     sxIconButtonColor,
 } from 'theme/sxIconButtonColor';
+import { NavLink } from 'react-router-dom';
 
 const pages: Readonly<string[]> = ['Home', 'Projects'];
 
-export function ResponsiveAppBar({ side }: TAppBar) {
+export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const { width } = useWindowDimensions(getWindowDimension);
 
@@ -104,20 +105,28 @@ export function ResponsiveAppBar({ side }: TAppBar) {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem
+                                    <NavLink
                                         key={page}
-                                        onClick={handleCloseNavMenu}
-                                        sx={sxIconButtonColor()}
+                                        to={
+                                            page === 'Home'
+                                                ? '/'
+                                                : page.toLowerCase()
+                                        }
                                     >
-                                        <Typography
-                                            textAlign="center"
-                                            sx={{
-                                                color: 'primary.typography.text.complementary',
-                                            }}
+                                        <MenuItem
+                                            onClick={handleCloseNavMenu}
+                                            sx={sxIconButtonColor()}
                                         >
-                                            {page}
-                                        </Typography>
-                                    </MenuItem>
+                                            <Typography
+                                                textAlign="center"
+                                                sx={{
+                                                    color: 'primary.typography.text.complementary',
+                                                }}
+                                            >
+                                                {page}
+                                            </Typography>
+                                        </MenuItem>
+                                    </NavLink>
                                 ))}
                             </Menu>
                         </Box>

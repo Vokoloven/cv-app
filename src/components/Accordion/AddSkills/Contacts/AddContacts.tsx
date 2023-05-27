@@ -47,7 +47,11 @@ export const AddContacts = () => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             {icons.map((icon) => (
-                <IconButton key={icon} sx={sxIconButtonColor()}>
+                <IconButton
+                    key={icon}
+                    sx={sxIconButtonColor()}
+                    onClick={() => console.log(icon)}
+                >
                     {iconsHandler(icon, { width: 30, height: 30 })}
                 </IconButton>
             ))}

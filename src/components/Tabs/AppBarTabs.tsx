@@ -1,15 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { useNavigate } from 'react-router-dom';
+import { useCustomLocation } from 'hooks/useCustomLocation';
 
 export const AppBarTabs = () => {
-    const [value, setValue] = useState<string>('Home');
+    const pathname = useCustomLocation();
+    const [value, setValue] = useState<string | (() => void)>(() => {
+        if (pathname === '/') {
+            return 'Home';
+        } else {
+            return pathname.charAt(1).toUpperCase() + pathname.slice(2);
+        }
+    });
     const pages: Readonly<string[]> = ['Home', 'Projects'];
+    const navigate = useNavigate();
 
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        if (pathname === '/') {
+            setValue('Home');
+        } else {
+            setValue(pathname.charAt(1).toUpperCase() + pathname.slice(2));
+        }
+    }, [pathname]);
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -25,6 +43,9 @@ export const AppBarTabs = () => {
             >
                 {pages.map((item) => (
                     <Tab
+                        onClick={() =>
+                            navigate(item === 'Home' ? '/' : item.toLowerCase())
+                        }
                         key={item}
                         value={item}
                         label={item}

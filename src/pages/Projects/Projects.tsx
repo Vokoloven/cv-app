@@ -1,3 +1,18 @@
+import Box from '@mui/material/Box';
+import { BoxWrapper } from 'components/BoxWrapper';
+import { Photo } from 'components/Photo/Photo';
+import { CustomizedAccordion } from 'components/Accordion';
+
 export const Projects = () => {
-    return <div>Project</div>;
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <BoxWrapper side={'left'} page={'projects'}>
+                <Photo />
+                <CustomizedAccordion />
+            </BoxWrapper>
+            <BoxWrapper side={'right'} page={'projects'}>
+                <Box sx={{ mt: 2 }}>Projects</Box>
+            </BoxWrapper>
+        </Box>
+    );
 };
