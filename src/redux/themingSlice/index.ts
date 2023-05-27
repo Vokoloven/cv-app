@@ -2,6 +2,7 @@ import {
     themingSlice,
     persistedThemingReducer,
     colorModeSwitcher,
-} from './themingSlice'
+    hideButton,
+} from './themingSlice';
 
-export { themingSlice, persistedThemingReducer, colorModeSwitcher }
+export { themingSlice, persistedThemingReducer, colorModeSwitcher, hideButton };

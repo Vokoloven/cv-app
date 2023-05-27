@@ -6,7 +6,7 @@ import { User } from 'firebase/auth';
 
 type TLogin = {
     user: User;
-    token: string | undefined;
+    token?: string;
 };
 
 export const loginUserByGoogle = createAsyncThunk(
@@ -21,7 +21,7 @@ export const loginUserByGoogle = createAsyncThunk(
                     const token = credential?.accessToken;
                     const user = result.user;
 
-                    if (result) {
+                    if (result && credential) {
                         resolve({ token, user });
                     }
                 } catch (error) {

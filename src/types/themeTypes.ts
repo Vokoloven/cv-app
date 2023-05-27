@@ -1,6 +1,9 @@
-type TGenericColorMode<T> = T
+type TCustomTypeHandler<T> = T;
 
-export type TInitialStateTheming = TGenericColorMode<{
-    colorMode: 'light' | 'dark'
-}>
-export type TColorMode = TGenericColorMode<'light' | 'dark'>
+export type TInitialStateTheming = TCustomTypeHandler<{
+    colorMode: 'light' | 'dark';
+    uploadButton: null | 'hidden';
+}>;
+export type TColorMode = TCustomTypeHandler<'light' | 'dark'>;
+
+export type THideMode = TCustomTypeHandler<null | 'hidden'>;

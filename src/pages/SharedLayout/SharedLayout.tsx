@@ -16,12 +16,13 @@ export const SharedLayout = () => {
             >
                 <BoxWrapper side={'left'} page={'sharedLayout'}>
                     <Aside />
+                    <SpeedDialTooltipOpen side={'left'} />
                 </BoxWrapper>
                 <BoxWrapper side={'right'} page={'sharedLayout'}>
                     <ResponsiveAppBar side={'right'} />
+                    <SpeedDialTooltipOpen side={'right'} />
                 </BoxWrapper>
             </Box>
-            <SpeedDialTooltipOpen />
             <Outlet />
         </Box>
     );

@@ -10,6 +10,7 @@ import { Mode } from './Mode';
 import { Login } from './Login/Login';
 import { sxIconButtonColorSecondary } from 'theme/sxIconButtonColor';
 import Tooltip from '@mui/material/Tooltip';
+import { CustomToggleButton } from 'components/ToggleButton';
 
 type Anchor = 'right';
 
@@ -45,6 +46,7 @@ export function TemporaryDrawer() {
             <Login />
             <Download />
             <Mode />
+            <CustomToggleButton />
         </Box>
     );
 

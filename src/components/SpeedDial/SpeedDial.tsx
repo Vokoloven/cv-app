@@ -1,26 +1,44 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
 import { sxSpeedDial } from './style/sxSpeedDial';
+import { TAppBar } from 'types/globalTypes';
+import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from '@mui/icons-material/School';
+import { useCustomLocation } from 'hooks/useCustomLocation';
+import { actionsHandler } from './actionsHandler';
+import { Modal } from 'components/Modal';
+import { useSelector } from 'react-redux';
+import { selectTheming } from 'redux/themingSlice/selectTheming';
 
 const actions = [
-    { icon: <FileCopyIcon />, name: 'Copy' },
-    { icon: <SaveIcon />, name: 'Save' },
-    { icon: <PrintIcon />, name: 'Print' },
-    { icon: <ShareIcon />, name: 'Share' },
+    { icon: <PersonIcon />, name: 'Name' },
+    { icon: <InfoIcon />, name: 'Summary' },
+    { icon: <AccountTreeIcon />, name: 'Projects' },
+    { icon: <WorkIcon />, name: 'Experience' },
+    { icon: <SchoolIcon />, name: 'Education' },
 ];
 
-export function SpeedDialTooltipOpen() {
-    const [open, setOpen] = React.useState(false);
+export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
+    const pathname = useCustomLocation();
+    const [open, setOpen] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [actionName, setActionName] = useState<string | null>(null);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const { uploadButton } = useSelector(selectTheming);
+
+    const onClickHandler = (value: string) => {
+        handleClose();
+        setActionName(value);
+        setOpenModal(true);
+    };
 
     return (
         <Box
@@ -28,13 +46,22 @@ export function SpeedDialTooltipOpen() {
                 position: 'absolute',
                 right: 0,
                 top: '100px',
-
                 height: 330,
                 transform: 'translateZ(0px)',
+
+                zIndex: 1,
                 flexGrow: 1,
-                [theme.breakpoints.down('tablet')]: {
-                    display: 'none',
-                },
+                ...(side === 'left' && {
+                    [theme.breakpoints.up('tablet')]: {
+                        display: 'none',
+                    },
+                    ...(pathname === '/' && { display: 'none' }),
+                }),
+                ...(side === 'right' && {
+                    [theme.breakpoints.down('tablet')]: {
+                        display: 'none',
+                    },
+                }),
             })}
         >
             <SpeedDial
@@ -45,17 +72,23 @@ export function SpeedDialTooltipOpen() {
                 onOpen={handleOpen}
                 open={open}
                 direction={'down'}
+                hidden={uploadButton ? true : false}
             >
-                {actions.map((action) => (
+                {actionsHandler(actions, pathname, side)?.map((action) => (
                     <SpeedDialAction
                         key={action.name}
                         icon={action.icon}
                         tooltipTitle={action.name}
                         tooltipOpen
-                        onClick={handleClose}
+                        onClick={onClickHandler.bind(null, action?.name)}
                     />
                 ))}
             </SpeedDial>
+            <Modal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                actionName={actionName}
+            />
         </Box>
     );
 }

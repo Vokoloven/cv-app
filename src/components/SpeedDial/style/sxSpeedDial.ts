@@ -5,13 +5,18 @@ export const sxSpeedDial = () => {
         '& 	.MuiSpeedDial-fab': {
             ...(theme.palette.mode === 'light'
                 ? {
+                      color: `${theme.palette.primary.button.triadic.primary}`,
                       bgcolor: `${theme.palette.primary.button.complementary}`,
                       '&:hover': {
                           bgcolor: `${theme.palette.primary.button.complementary}`,
                       },
                   }
                 : {
+                      color: `${theme.palette.primary.button.triadic.primary}`,
                       bgcolor: `${theme.palette.primary.button.primary}`,
+                      '&:hover': {
+                          bgcolor: `${theme.palette.primary.button.primary}`,
+                      },
                   }),
         },
         '& .MuiSpeedDialIcon-icon': {
@@ -31,7 +36,7 @@ export const sxSpeedDial = () => {
                 : {
                       color: `${theme.palette.primary.button.primary}`,
                       '&:hover': {
-                          bgcolor: `${theme.palette.primary.button.primary}`,
+                          bgcolor: `${theme.palette.primary.button.analogous.primary}`,
                       },
                   }),
         },
