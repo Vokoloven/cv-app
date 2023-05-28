@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,10 +17,14 @@ type TProps = {
 const buttons: Readonly<'Ok' | 'Cancel'>[] = ['Cancel', 'Ok'];
 
 export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
+    const [input, setInput] = useState<any>({});
+
     const closeModal = (
-        _event: React.SyntheticEvent<unknown>,
+        event: React.SyntheticEvent<unknown>,
         reason?: string
     ) => {
+        const { textContent } = event.currentTarget as HTMLElement;
+        console.log(textContent);
         if (reason !== 'backdropClick') {
             setOpenModal(false);
         }
@@ -31,8 +35,10 @@ export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
             [e.target.id]: e.target.value,
         };
 
-        console.log(value);
+        setInput((prevState: any) => ({ ...prevState, ...value }));
     };
+
+    console.log(input);
 
     return (
         <Box>
