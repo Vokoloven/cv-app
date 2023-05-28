@@ -4,10 +4,15 @@ const nameFields = [
     { id: 'position', label: 'Position' },
 ];
 
+const summaryFields = [{ id: 'description', label: 'Description' }];
+
 export const fieldsHandler = (actionName: string | null) => {
     switch (actionName) {
         case 'Name':
             return nameFields;
+            break;
+        case 'Summary':
+            return summaryFields;
             break;
 
         default:

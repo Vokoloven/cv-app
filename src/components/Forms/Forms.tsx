@@ -7,11 +7,18 @@ type TProps = {
     actionName: string | null;
 };
 
+const multiLineHandler = (actionName: string | null) => {
+    if (actionName === 'Summary') {
+        return true;
+    }
+};
+
 export const Forms = ({ actionName }: TProps) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             {fieldsHandler(actionName)?.map(({ id, label }) => (
                 <TextField
+                    multiline={multiLineHandler(actionName)}
                     key={id}
                     id={id}
                     label={label}

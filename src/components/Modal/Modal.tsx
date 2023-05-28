@@ -14,20 +14,25 @@ type TProps = {
     actionName: string | null;
 };
 
-const buttons: Readonly<'Ok' | 'Cancel'>[] = ['Cancel', 'Ok'];
+type TInput<T> = {
+    [x: string]: T;
+};
+
+const buttons: Readonly<'Cancel' | 'Ok'>[] = ['Cancel', 'Ok'];
 
 export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
-    const [input, setInput] = useState<any>({});
+    const [input, setInput] = useState<TInput<string>>({});
 
     const closeModal = (
         event: React.SyntheticEvent<unknown>,
         reason?: string
     ) => {
         const { textContent } = event.currentTarget as HTMLElement;
-        console.log(textContent);
+        //Here Should be Send Request
         if (reason !== 'backdropClick') {
             setOpenModal(false);
         }
+        setInput({});
     };
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +40,7 @@ export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
             [e.target.id]: e.target.value,
         };
 
-        setInput((prevState: any) => ({ ...prevState, ...value }));
+        setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
     };
 
     console.log(input);
