@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -25,6 +26,10 @@ type TProps = {
     actionName: string | null;
 };
 
+type TInput<T> = {
+    [x: string]: T;
+};
+
 const buttons: Readonly<'Cancel' | 'Ok'>[] = ['Cancel', 'Ok'];
 
 export const NestedModal = ({
@@ -32,6 +37,8 @@ export const NestedModal = ({
     setOpenModal,
     actionName,
 }: TProps) => {
+    const [input, setInput] = useState<TInput<string>>({});
+
     const handleOpen = () => {
         setOpenModal(true);
     };
@@ -41,7 +48,18 @@ export const NestedModal = ({
 
     const closeModal = (value: string) => {
         setOpenModal(false);
+
         console.log(value);
+
+        setInput({});
+    };
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = {
+            [e.target.id]: e.target.value,
+        };
+
+        setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
     };
 
     return (
@@ -67,7 +85,16 @@ export const NestedModal = ({
                               }),
                     })}
                 >
-                    <Forms actionName={actionName} />
+                    <Box
+                        onChange={onChangeHandler}
+                        component="form"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <Forms actionName={actionName} />
+                    </Box>
                     <Box
                         sx={{
                             display: 'flex',

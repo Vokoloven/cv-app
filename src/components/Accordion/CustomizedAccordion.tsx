@@ -1,77 +1,25 @@
-import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { CustomizedAccordionItem } from './CustomizedAccordionItem';
-import { AddContacts } from './AddSkills/Contacts/AddContacts';
-import { AddTechSkills } from './AddSkills/TechSkills/AddTechSkills';
-import { AddSoftSkills } from './AddSkills/SoftSkills/AddSoftSkills';
-import { AddLanguages } from './AddSkills/AddLanguages/AddLanguages';
+import { AddContacts } from './AddContacts';
 import { useSelector } from 'react-redux';
 import { selectAuth } from 'redux/authSlice';
+import { AddButton } from 'components/Buttons';
+import { TActionName, items, TTitle } from './items';
 
-type TItem<T, U> = {
-    value: T;
-    title: U;
-}[];
-
-type TValue = 'contacts' | 'tech-skills' | 'soft-skills' | 'languages';
-
-const items: TItem<
-    TValue,
-    'Contacts' | 'Tech Skills' | 'Soft Skills' | 'Languages'
-> = [
-    {
-        value: 'contacts',
-        title: 'Contacts',
-    },
-    {
-        value: 'tech-skills',
-        title: 'Tech Skills',
-    },
-    {
-        value: 'soft-skills',
-        title: 'Soft Skills',
-    },
-    {
-        value: 'languages',
-        title: 'Languages',
-    },
-];
-
-const childrenHandler = (value: TValue) => {
-    switch (value) {
-        case 'contacts':
-            return (
-                <Box>
-                    <AddContacts />
-                </Box>
-            );
-
-            break;
-        case 'tech-skills':
-            return (
-                <Box>
-                    <AddTechSkills />
-                </Box>
-            );
-            break;
-        case 'soft-skills':
-            return (
-                <Box>
-                    <AddSoftSkills />
-                </Box>
-            );
-            break;
-        case 'languages':
-            return (
-                <Box>
-                    <AddLanguages />
-                </Box>
-            );
-            break;
-
-        default:
-            return null;
+const childrenHandler = (
+    actionName: TActionName,
+    ariaLabel: string,
+    title: TTitle
+) => {
+    if (actionName === 'contacts') {
+        return <AddContacts />;
+    } else {
+        return (
+            <AddButton ariaLabel={ariaLabel} action={actionName}>
+                {`Add ${title}`}
+            </AddButton>
+        );
     }
 };
 
@@ -97,15 +45,15 @@ export function CustomizedAccordion() {
 
     return (
         <Box sx={{ mt: 2 }}>
-            {items.map(({ value, title }) => (
+            {items.map(({ actionName, title, ariaLabel }) => (
                 <CustomizedAccordionItem
-                    key={value}
+                    key={actionName}
                     expanded={expanded}
                     handleChange={handleChange}
-                    value={value}
+                    value={actionName}
                     title={title}
                 >
-                    {childrenHandler(value)}
+                    {childrenHandler(actionName, ariaLabel, title)}
                 </CustomizedAccordionItem>
             ))}
         </Box>

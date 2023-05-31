@@ -8,14 +8,15 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import Typography from '@mui/material/Typography';
 import { SyntheticEvent } from 'react';
 import { ReactNode } from 'react';
+import { TActionName, TTitle } from 'components/Accordion/items';
 
 type TAccordion = {
     expanded: string | false;
     handleChange: (
         panel: string
     ) => (event: SyntheticEvent, newExpanded: boolean) => void;
-    value: 'contacts' | 'tech-skills' | 'soft-skills' | 'languages';
-    title: 'Contacts' | 'Tech Skills' | 'Soft Skills' | 'Languages';
+    value: TActionName;
+    title: TTitle;
     children: ReactNode;
 };
 
