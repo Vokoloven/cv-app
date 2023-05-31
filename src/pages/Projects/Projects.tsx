@@ -7,8 +7,10 @@ export const Projects = () => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <BoxWrapper side={'left'} page={'projects'}>
-                <Photo />
-                <CustomizedAccordion />
+                <Box sx={{ mt: 2 }}>
+                    <Photo />
+                    <CustomizedAccordion />
+                </Box>
             </BoxWrapper>
             <BoxWrapper side={'right'} page={'projects'}>
                 <Box sx={{ mt: 2 }}>Projects</Box>

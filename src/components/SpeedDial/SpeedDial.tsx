@@ -16,8 +16,11 @@ import { actionsHandler } from './actionsHandler';
 import { Modal } from 'components/Modal';
 import { useSelector } from 'react-redux';
 import { selectTheming } from 'redux/themingSlice/selectTheming';
+import { selectAuth } from 'redux/authSlice/selectAuth';
 
-const actions = [
+type TActions = { icon: JSX.Element; name: string };
+
+const actions: TActions[] = [
     { icon: <PersonIcon />, name: 'Name' },
     { icon: <InfoIcon />, name: 'Summary' },
     { icon: <AccountTreeIcon />, name: 'Projects' },
@@ -33,6 +36,7 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { uploadButton } = useSelector(selectTheming);
+    const { access } = useSelector(selectAuth);
 
     const onClickHandler = (value: string) => {
         handleClose();
@@ -40,55 +44,68 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
         setOpenModal(true);
     };
 
-    return (
-        <Box
-            sx={(theme) => ({
-                position: 'absolute',
-                right: 0,
-                top: '100px',
-                height: 330,
-                transform: 'translateZ(0px)',
+    const isRenderSpeedDial = (access: number) => {
+        if (access === 0) {
+            return (
+                <Box
+                    sx={(theme) => ({
+                        position: 'absolute',
+                        right: 0,
+                        top: '100px',
+                        height: 330,
+                        transform: 'translateZ(0px)',
 
-                zIndex: 1,
-                flexGrow: 1,
-                ...(side === 'left' && {
-                    [theme.breakpoints.up('tablet')]: {
-                        display: 'none',
-                    },
-                    ...(pathname === '/' && { display: 'none' }),
-                }),
-                ...(side === 'right' && {
-                    [theme.breakpoints.down('tablet')]: {
-                        display: 'none',
-                    },
-                }),
-            })}
-        >
-            <SpeedDial
-                ariaLabel="SpeedDial tooltip example"
-                sx={sxSpeedDial()}
-                icon={<SpeedDialIcon openIcon={<DataSaverOnIcon />} />}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                open={open}
-                direction={'down'}
-                hidden={uploadButton ? true : false}
-            >
-                {actionsHandler(actions, pathname, side)?.map((action) => (
-                    <SpeedDialAction
-                        key={action.name}
-                        icon={action.icon}
-                        tooltipTitle={action.name}
-                        tooltipOpen
-                        onClick={onClickHandler.bind(null, action?.name)}
+                        zIndex: 1,
+                        flexGrow: 1,
+                        ...(side === 'left' && {
+                            [theme.breakpoints.up('tablet')]: {
+                                display: 'none',
+                            },
+                            ...(pathname === '/' && { display: 'none' }),
+                        }),
+                        ...(side === 'right' && {
+                            [theme.breakpoints.down('tablet')]: {
+                                display: 'none',
+                            },
+                        }),
+                    })}
+                >
+                    <SpeedDial
+                        ariaLabel="SpeedDial tooltip example"
+                        sx={sxSpeedDial()}
+                        icon={<SpeedDialIcon openIcon={<DataSaverOnIcon />} />}
+                        onClose={handleClose}
+                        onOpen={handleOpen}
+                        open={open}
+                        direction={'down'}
+                        hidden={uploadButton ? true : false}
+                    >
+                        {actionsHandler(actions, pathname, side)?.map(
+                            (action) => (
+                                <SpeedDialAction
+                                    key={action.name}
+                                    icon={action.icon}
+                                    tooltipTitle={action.name}
+                                    tooltipOpen
+                                    onClick={onClickHandler.bind(
+                                        null,
+                                        action?.name
+                                    )}
+                                />
+                            )
+                        )}
+                    </SpeedDial>
+                    <Modal
+                        openModal={openModal}
+                        setOpenModal={setOpenModal}
+                        actionName={actionName}
                     />
-                ))}
-            </SpeedDial>
-            <Modal
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                actionName={actionName}
-            />
-        </Box>
-    );
+                </Box>
+            );
+        } else {
+            return null;
+        }
+    };
+
+    return isRenderSpeedDial(access);
 }

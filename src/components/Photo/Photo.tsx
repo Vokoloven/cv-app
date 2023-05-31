@@ -16,7 +16,6 @@ export const Photo = () => {
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
-                mt: 2,
             }}
         >
             <Card sx={{ maxWidth: 345 }} elevation={4}>

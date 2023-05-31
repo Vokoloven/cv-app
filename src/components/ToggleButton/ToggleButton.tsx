@@ -12,7 +12,7 @@ import { hideButton } from 'redux/themingSlice';
 
 export const CustomToggleButton = () => {
     const { uploadButton } = useSelector(selectTheming);
-    const { authorized } = useSelector(selectAuth);
+    const { access } = useSelector(selectAuth);
     const [alignment, setAlignment] = useState<'hidden' | null>(uploadButton);
     const dispatch = useDispatch();
 
@@ -26,8 +26,8 @@ export const CustomToggleButton = () => {
         dispatch(hideButton(alignment));
     }, [alignment, dispatch]);
 
-    const authItems = (authorized: boolean) => {
-        if (authorized) {
+    const authItems = (access: number) => {
+        if (access === 0) {
             return (
                 <Box
                     sx={{
@@ -68,5 +68,5 @@ export const CustomToggleButton = () => {
         }
     };
 
-    return authItems(authorized);
+    return authItems(access);
 };
