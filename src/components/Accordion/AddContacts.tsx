@@ -9,6 +9,10 @@ import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 
 type TIcons = 'phone' | 'email' | 'github' | 'linkedin' | 'telegram';
 
+type TClickHandler = {
+    onClickHandler: (actionName: string) => void;
+};
+
 type TProps = {
     [x: string]: string | number;
 };
@@ -43,14 +47,14 @@ const iconsHandler = (icons: TIcons, sx: TProps) => {
     }
 };
 
-export const AddContacts = () => {
+export const AddContacts = ({ onClickHandler }: TClickHandler) => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             {icons.map((icon) => (
                 <IconButton
                     key={icon}
                     sx={sxIconButtonColor()}
-                    onClick={() => console.log(icon)}
+                    onClick={() => onClickHandler(icon)}
                 >
                     {iconsHandler(icon, { width: 30, height: 30 })}
                 </IconButton>

@@ -4,6 +4,7 @@ export type TActionName =
     | 'softSkills'
     | 'languages';
 export type TTitle = 'Contacts' | 'Tech Skills' | 'Soft Skills' | 'Languages';
+
 type TItem = {
     actionName: TActionName;
     title: TTitle;

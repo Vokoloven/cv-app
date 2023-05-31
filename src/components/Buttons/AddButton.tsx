@@ -5,15 +5,21 @@ import { TActionName } from 'components/Accordion/items';
 
 type TProps = {
     ariaLabel: string;
-    action: TActionName;
+    actionName: TActionName;
+    onClickHandler: (actionName: string) => void;
 };
 
 type TCombineProps = TChildren & TProps;
 
-export const AddButton = ({ children, ariaLabel, action }: TCombineProps) => {
+export const AddButton = ({
+    children,
+    ariaLabel,
+    actionName,
+    onClickHandler,
+}: TCombineProps) => {
     return (
         <Button
-            onClick={() => console.log(action)}
+            onClick={() => onClickHandler(actionName)}
             aria-label={ariaLabel}
             sx={(theme) => ({
                 ...(theme.palette.mode === 'light'

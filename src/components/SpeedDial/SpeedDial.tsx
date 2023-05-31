@@ -38,9 +38,9 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
     const { uploadButton } = useSelector(selectTheming);
     const { access } = useSelector(selectAuth);
 
-    const onClickHandler = (value: string) => {
+    const onClickHandler = (actionName: string) => {
         handleClose();
-        setActionName(value);
+        setActionName(actionName);
         setOpenModal(true);
     };
 

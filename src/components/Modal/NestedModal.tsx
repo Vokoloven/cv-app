@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import { ChildModal } from './ChildModal';
-import { SetStateAction, Dispatch } from 'react';
 import { ModalButton } from 'components/Buttons';
 import { Forms } from 'components/Forms/';
+import { TSetStateBoolean } from 'types/globalTypes';
 
 const style = {
     position: 'absolute' as 'const',
@@ -22,7 +21,7 @@ const style = {
 
 type TProps = {
     openModal: boolean;
-    setOpenModal: Dispatch<SetStateAction<boolean>>;
+    setOpenModal: TSetStateBoolean;
     actionName: string | null;
 };
 
@@ -39,9 +38,6 @@ export const NestedModal = ({
 }: TProps) => {
     const [input, setInput] = useState<TInput<string>>({});
 
-    const handleOpen = () => {
-        setOpenModal(true);
-    };
     const handleClose = () => {
         setOpenModal(false);
     };
@@ -63,8 +59,7 @@ export const NestedModal = ({
     };
 
     return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+        <Box>
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -117,6 +112,6 @@ export const NestedModal = ({
                     <ChildModal />
                 </Box>
             </Modal>
-        </div>
+        </Box>
     );
 };

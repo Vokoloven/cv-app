@@ -6,17 +6,23 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from 'redux/authSlice';
 import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
+import { NestedModal } from 'components/Modal/NestedModal';
 
 const childrenHandler = (
     actionName: TActionName,
     ariaLabel: string,
-    title: TTitle
+    title: TTitle,
+    onClickHandler: (actionName: string) => void
 ) => {
     if (actionName === 'contacts') {
-        return <AddContacts />;
+        return <AddContacts onClickHandler={onClickHandler} />;
     } else {
         return (
-            <AddButton ariaLabel={ariaLabel} action={actionName}>
+            <AddButton
+                ariaLabel={ariaLabel}
+                actionName={actionName}
+                onClickHandler={onClickHandler}
+            >
                 {`Add ${title}`}
             </AddButton>
         );
@@ -24,8 +30,15 @@ const childrenHandler = (
 };
 
 export function CustomizedAccordion() {
+    const [actionName, setActionName] = useState<string | null>(null);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<string | false>(false);
     const { access } = useSelector(selectAuth);
+
+    const onClickHandler = (actionName: string) => {
+        setOpenModal(true);
+        setActionName(actionName);
+    };
 
     useEffect(() => {
         if (access !== 0) {
@@ -53,9 +66,19 @@ export function CustomizedAccordion() {
                     value={actionName}
                     title={title}
                 >
-                    {childrenHandler(actionName, ariaLabel, title)}
+                    {childrenHandler(
+                        actionName,
+                        ariaLabel,
+                        title,
+                        onClickHandler
+                    )}
                 </CustomizedAccordionItem>
             ))}
+            <NestedModal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                actionName={actionName}
+            />
         </Box>
     );
 }
