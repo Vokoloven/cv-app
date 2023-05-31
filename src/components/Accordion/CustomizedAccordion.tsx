@@ -58,6 +58,11 @@ export function CustomizedAccordion() {
 
     return (
         <Box sx={{ mt: 2 }}>
+            <NestedModal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                actionName={actionName}
+            />
             {items.map(({ actionName, title, ariaLabel }) => (
                 <CustomizedAccordionItem
                     key={actionName}
@@ -74,11 +79,6 @@ export function CustomizedAccordion() {
                     )}
                 </CustomizedAccordionItem>
             ))}
-            <NestedModal
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                actionName={actionName}
-            />
         </Box>
     );
 }
