@@ -9,10 +9,7 @@ type TName = 'Cancel' | 'Ok';
 type TProps = {
     ariaLabel: string;
     iconName: TName;
-    closeModal: (
-        _event: React.SyntheticEvent<unknown>,
-        reason?: string
-    ) => void;
+    closeModal: (value: string) => void;
 };
 
 type TCombineProps = TChildren & TProps;
@@ -38,7 +35,7 @@ export const ModalButton = ({
 
     return (
         <Button
-            onClick={closeModal}
+            onClick={closeModal.bind(null, iconName)}
             aria-label={ariaLabel}
             sx={(theme) => ({
                 ...(theme.palette.mode === 'light'

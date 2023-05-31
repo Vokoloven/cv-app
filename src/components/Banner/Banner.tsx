@@ -12,6 +12,7 @@ export const Banner = () => {
         <Box>
             {bannerHeadres.map(({ name }) => (
                 <Box
+                    key={name}
                     sx={(theme) => ({
                         display: 'flex',
                         alignItems: 'center',
