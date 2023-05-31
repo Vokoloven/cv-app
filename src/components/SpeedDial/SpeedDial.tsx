@@ -18,7 +18,9 @@ import { useSelector } from 'react-redux';
 import { selectTheming } from 'redux/themingSlice/selectTheming';
 import { selectAuth } from 'redux/authSlice/selectAuth';
 
-const actions = [
+type TActions = { icon: JSX.Element; name: string };
+
+const actions: TActions[] = [
     { icon: <PersonIcon />, name: 'Name' },
     { icon: <InfoIcon />, name: 'Summary' },
     { icon: <AccountTreeIcon />, name: 'Projects' },
