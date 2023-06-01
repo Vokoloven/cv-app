@@ -9,9 +9,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
+    borderRadius: 4,
+    boxShadow: 4,
     pt: 2,
     px: 4,
     pb: 3,
@@ -35,7 +34,19 @@ export const ChildModal = () => {
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
             >
-                <Box sx={{ ...style, width: 200 }}>
+                <Box
+                    sx={(theme) => ({
+                        ...style,
+                        width: 320,
+                        ...(theme.palette.mode === 'light'
+                            ? { bgcolor: 'primary.main' }
+                            : {
+                                  backgroundColor:
+                                      'primary.background.triadic.complementary',
+                                  backgroundImage: `${theme.palette.primary.background.linearGradient}`,
+                              }),
+                    })}
+                >
                     <h2 id="child-modal-title">Text in a child modal</h2>
                     <p id="child-modal-description">
                         Lorem ipsum, dolor sit amet consectetur adipisicing
