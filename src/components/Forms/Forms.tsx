@@ -2,14 +2,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { fieldsHandler } from './fieldsHandler';
 import { sxFormsProps } from './sxFormsProps';
-import { useState } from 'react';
+import { TInput } from 'components/Modal/NestedModal';
 
 type TProps = {
     actionName: string | null;
-};
-
-type TInput<T> = {
-    [x: string]: T;
+    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    input: TInput<string>;
 };
 
 const multiLineHandler = (id: string) => {
@@ -28,17 +26,7 @@ const multiLineHandler = (id: string) => {
     }
 };
 
-export const Forms = ({ actionName }: TProps) => {
-    const [input, setInput] = useState<TInput<string>>({});
-
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = {
-            [e.target.id]: e.target.value,
-        };
-
-        setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
-    };
-
+export const Forms = ({ actionName, onChangeHandler, input }: TProps) => {
     return (
         <Box
             onChange={onChangeHandler}

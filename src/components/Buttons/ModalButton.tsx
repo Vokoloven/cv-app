@@ -8,7 +8,7 @@ type TName = 'Cancel' | 'Ok';
 type TProps = {
     ariaLabel: string;
     iconName: TName;
-    closeModal: (value: string) => void;
+    closeModal: (value: 'Cancel' | 'Ok') => void;
 };
 
 type TCombineProps = TChildren & TProps;

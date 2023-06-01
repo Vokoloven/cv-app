@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ChildModal } from './ChildModal';
+// import { ChildModal } from './ChildModal';
 import { ModalButton } from 'components/Buttons';
 import { Forms } from 'components/Forms/';
 import { TSetStateBoolean } from 'types/globalTypes';
+import { doc, setDoc, collection, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
 const style = {
     position: 'absolute' as 'const',
@@ -16,6 +19,10 @@ const style = {
     pt: 2,
     px: 4,
     pb: 3,
+};
+
+export type TInput<T> = {
+    [x: string]: T;
 };
 
 type TProps = {
@@ -31,20 +38,33 @@ export const NestedModal = ({
     setOpenModal,
     actionName,
 }: TProps) => {
-    const handleClose = () => {
-        setOpenModal(false);
+    const [input, setInput] = useState<TInput<string>>({});
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = {
+            [e.target.id]: e.target.value,
+        };
+
+        setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
     };
 
-    const closeModal = (value: string) => {
+    const closeModal = async (value: 'Cancel' | 'Ok') => {
         setOpenModal(false);
-        console.log(value);
+        if (value === 'Ok') {
+            const collectionRef = collection(db, 'cvAppData');
+            const docRef = doc(collectionRef, `${actionName}`);
+            const idRef = docRef.id;
+
+            await setDoc(docRef, { idRef, ...input });
+        }
+        setInput({});
     };
 
     return (
         <Box>
             <Modal
                 open={openModal}
-                onClose={handleClose}
+                onClose={closeModal}
                 disableRestoreFocus
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
@@ -62,7 +82,11 @@ export const NestedModal = ({
                               }),
                     })}
                 >
-                    <Forms actionName={actionName} />
+                    <Forms
+                        actionName={actionName}
+                        onChangeHandler={onChangeHandler}
+                        input={input}
+                    />
 
                     <Box
                         sx={{
@@ -83,7 +107,7 @@ export const NestedModal = ({
                             </ModalButton>
                         ))}
                     </Box>
-                    <ChildModal />
+                    {/* <ChildModal /> */}
                 </Box>
             </Modal>
         </Box>
