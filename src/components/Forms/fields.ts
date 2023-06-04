@@ -25,9 +25,9 @@ const experienceFields: TFields = [
 const experienceFieldsItems: TFields = [{ id: 'item', label: 'Item' }];
 
 const educationFields: TFields = [
-    { id: 'institution ', label: 'Institution' },
-    { id: 'period ', label: 'Period' },
-    { id: 'degree ', label: 'Degree' },
+    { id: 'institution', label: 'Institution' },
+    { id: 'period', label: 'Period' },
+    { id: 'degree', label: 'Degree' },
 ];
 
 const phoneFields: TFields = [{ id: 'phone', label: 'Phone' }];

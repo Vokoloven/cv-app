@@ -1,25 +1,17 @@
+// import { useSelector } from 'react-redux';
+// import { selectData } from 'redux/getDataSlice';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-// import { ChildModal } from './ChildModal';
-import { ModalButton } from 'components/Buttons';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { Forms } from 'components/Forms/';
+import { ModalButton } from 'components/Buttons';
+import { firebaseSetDoc } from 'firebase/';
 import { TSetStateBoolean } from 'types/globalTypes';
-import { doc, setDoc, collection, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase/config';
-
-const style = {
-    position: 'absolute' as 'const',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    borderRadius: 4,
-    boxShadow: 4,
-    pt: 2,
-    px: 4,
-    pb: 3,
-};
+import { AppDispatch } from 'redux/store';
 
 export type TInput<T> = {
     [x: string]: T;
@@ -38,7 +30,9 @@ export const NestedModal = ({
     setOpenModal,
     actionName,
 }: TProps) => {
+    // const { data } = useSelector(selectData);
     const [input, setInput] = useState<TInput<string>>({});
+    const dispatch = useDispatch<AppDispatch>();
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = {
@@ -48,68 +42,53 @@ export const NestedModal = ({
         setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
     };
 
-    const closeModal = async (value: 'Cancel' | 'Ok') => {
+    const closeModal = (value: 'Cancel' | 'Ok') => {
         setOpenModal(false);
         if (value === 'Ok') {
-            const collectionRef = collection(db, 'cvAppData');
-            const docRef = doc(collectionRef, `${actionName}`);
-            const idRef = docRef.id;
-
-            await setDoc(docRef, { idRef, ...input });
+            firebaseSetDoc(actionName, input, dispatch);
         }
         setInput({});
     };
 
     return (
         <Box>
-            <Modal
+            <Dialog
                 open={openModal}
                 onClose={closeModal}
                 disableRestoreFocus
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
+                scroll={'paper'}
             >
-                <Box
-                    sx={(theme) => ({
-                        ...style,
-                        width: 320,
-                        ...(theme.palette.mode === 'light'
-                            ? { bgcolor: 'primary.main' }
-                            : {
-                                  backgroundColor:
-                                      'primary.background.triadic.complementary',
-                                  backgroundImage: `${theme.palette.primary.background.linearGradient}`,
-                              }),
-                    })}
-                >
+                <DialogTitle>
+                    Fill the "{actionName?.toUpperCase()}" Form
+                </DialogTitle>
+                <DialogContent>
                     <Forms
                         actionName={actionName}
                         onChangeHandler={onChangeHandler}
                         input={input}
                     />
-
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: 'space-around',
-                            mt: 2,
-                        }}
-                    >
-                        {buttons.map((button) => (
-                            <ModalButton
-                                key={button}
-                                ariaLabel={'Close Button'}
-                                iconName={button}
-                                closeModal={closeModal}
-                            >
-                                {button}
-                            </ModalButton>
-                        ))}
-                    </Box>
-                    {/* <ChildModal /> */}
-                </Box>
-            </Modal>
+                </DialogContent>
+                <DialogActions
+                    sx={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'space-around',
+                        mt: 2,
+                        pb: 2,
+                    }}
+                >
+                    {buttons.map((button) => (
+                        <ModalButton
+                            key={button}
+                            ariaLabel={'Close Button'}
+                            iconName={button}
+                            closeModal={closeModal}
+                        >
+                            {button}
+                        </ModalButton>
+                    ))}
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 };

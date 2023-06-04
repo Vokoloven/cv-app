@@ -1,3 +1,4 @@
 import { Banner } from './Banner';
+import { BannerItems } from './BannerItems';
 
-export { Banner };
+export { Banner, BannerItems };
