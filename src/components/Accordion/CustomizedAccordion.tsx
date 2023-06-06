@@ -7,6 +7,7 @@ import { selectAuth } from 'redux/authSlice';
 import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
 import { NestedModal } from 'components/Modal/NestedModal';
+import { PaperItems } from '.';
 
 const childrenHandler = (
     actionName: TActionName,
@@ -64,20 +65,22 @@ export function CustomizedAccordion() {
                 actionName={actionName}
             />
             {items.map(({ actionName, title, ariaLabel }) => (
-                <CustomizedAccordionItem
-                    key={actionName}
-                    expanded={expanded}
-                    handleChange={handleChange}
-                    value={actionName}
-                    title={title}
-                >
-                    {childrenHandler(
-                        actionName,
-                        ariaLabel,
-                        title,
-                        onClickHandler
-                    )}
-                </CustomizedAccordionItem>
+                <Box key={actionName}>
+                    <CustomizedAccordionItem
+                        expanded={expanded}
+                        handleChange={handleChange}
+                        value={actionName}
+                        title={title}
+                    >
+                        {childrenHandler(
+                            actionName,
+                            ariaLabel,
+                            title,
+                            onClickHandler
+                        )}
+                    </CustomizedAccordionItem>
+                    <PaperItems actionName={actionName} />
+                </Box>
             ))}
         </Box>
     );

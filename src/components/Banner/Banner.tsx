@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { BannerItems } from '.';
+import { Spinner } from 'components/Spinner/Spinner';
+import { useSelector } from 'react-redux';
+import { selectData } from 'redux/getDataSlice';
 
 const bannerHeadres: { name: string }[] = [
     { name: 'Summary' },
@@ -9,6 +12,8 @@ const bannerHeadres: { name: string }[] = [
 ];
 
 export const Banner = () => {
+    const { loading } = useSelector(selectData);
+
     return (
         <Box>
             {bannerHeadres.map(({ name }) => (
@@ -41,7 +46,9 @@ export const Banner = () => {
                             {name}
                         </Typography>
                     </Box>
-                    <BannerItems name={name} />
+
+                    <Spinner loading={loading} />
+                    {loading === 'succeeded' && <BannerItems name={name} />}
                 </Box>
             ))}
         </Box>

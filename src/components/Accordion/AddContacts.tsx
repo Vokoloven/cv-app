@@ -6,8 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
-
-type TIcons = 'phone' | 'email' | 'github' | 'linkedin' | 'telegram';
+import { icons, TIcons } from './icons';
 
 type TClickHandler = {
     onClickHandler: (actionName: string) => void;
@@ -16,14 +15,6 @@ type TClickHandler = {
 type TProps = {
     [x: string]: string | number;
 };
-
-const icons: Readonly<TIcons[]> = [
-    'phone',
-    'email',
-    'github',
-    'linkedin',
-    'telegram',
-];
 
 const iconsHandler = (icons: TIcons, sx: TProps) => {
     switch (icons) {

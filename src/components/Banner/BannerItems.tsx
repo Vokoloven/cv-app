@@ -13,7 +13,7 @@ const sxItems = () => {
 };
 
 export const BannerItems = ({ name }: TProps) => {
-    const typeGuard = (name: string) => {
+    const namesGuard = (name: string) => {
         switch (name) {
             case 'Summary':
                 return 'Summary';
@@ -32,9 +32,9 @@ export const BannerItems = ({ name }: TProps) => {
         }
     };
 
-    const summary = useRequiredDoc(`${typeGuard(name)}`)?.description;
-    const experience = useRequiredDoc(`${typeGuard(name)}`)?.Experience;
-    const education = useRequiredDoc(`${typeGuard(name)}`)?.Education;
+    const summary = useRequiredDoc(`${namesGuard(name)}`)?.description;
+    const experience = useRequiredDoc(`${namesGuard(name)}`)?.Experience;
+    const education = useRequiredDoc(`${namesGuard(name)}`)?.Education;
 
     return (
         <>
