@@ -1,3 +1,3 @@
-import { Modal } from './Modal';
+import { NestedModal } from './NestedModal';
 
-export { Modal };
+export { NestedModal };

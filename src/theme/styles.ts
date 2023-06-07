@@ -36,6 +36,7 @@ export const styles = {
     },
     a: {
         textDecoration: 'none',
+        color: 'inherit',
     },
     li: {
         listStyle: 'none',

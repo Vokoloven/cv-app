@@ -6,20 +6,15 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
+import { icons, TIcons } from './icons';
 
-type TIcons = 'phone' | 'email' | 'github' | 'linkedin' | 'telegram';
+type TClickHandler = {
+    onClickHandler: (actionName: string) => void;
+};
 
 type TProps = {
     [x: string]: string | number;
 };
-
-const icons: Readonly<TIcons[]> = [
-    'phone',
-    'email',
-    'github',
-    'linkedin',
-    'telegram',
-];
 
 const iconsHandler = (icons: TIcons, sx: TProps) => {
     switch (icons) {
@@ -43,14 +38,14 @@ const iconsHandler = (icons: TIcons, sx: TProps) => {
     }
 };
 
-export const AddContacts = () => {
+export const AddContacts = ({ onClickHandler }: TClickHandler) => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             {icons.map((icon) => (
                 <IconButton
                     key={icon}
                     sx={sxIconButtonColor()}
-                    onClick={() => console.log(icon)}
+                    onClick={() => onClickHandler(icon)}
                 >
                     {iconsHandler(icon, { width: 30, height: 30 })}
                 </IconButton>

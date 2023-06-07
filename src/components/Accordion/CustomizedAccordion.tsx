@@ -1,83 +1,48 @@
-import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { CustomizedAccordionItem } from './CustomizedAccordionItem';
-import { AddContacts } from './AddSkills/Contacts/AddContacts';
-import { AddTechSkills } from './AddSkills/TechSkills/AddTechSkills';
-import { AddSoftSkills } from './AddSkills/SoftSkills/AddSoftSkills';
-import { AddLanguages } from './AddSkills/AddLanguages/AddLanguages';
+import { AddContacts } from './AddContacts';
 import { useSelector } from 'react-redux';
 import { selectAuth } from 'redux/authSlice';
+import { AddButton } from 'components/Buttons';
+import { TActionName, items, TTitle } from './items';
+import { NestedModal } from 'components/Modal/NestedModal';
+import { PaperItems } from '.';
+import { Spinner } from 'components/Spinner/Spinner';
+import { selectData } from 'redux/getDataSlice';
 
-type TItem<T, U> = {
-    value: T;
-    title: U;
-}[];
-
-type TValue = 'contacts' | 'tech-skills' | 'soft-skills' | 'languages';
-
-const items: TItem<
-    TValue,
-    'Contacts' | 'Tech Skills' | 'Soft Skills' | 'Languages'
-> = [
-    {
-        value: 'contacts',
-        title: 'Contacts',
-    },
-    {
-        value: 'tech-skills',
-        title: 'Tech Skills',
-    },
-    {
-        value: 'soft-skills',
-        title: 'Soft Skills',
-    },
-    {
-        value: 'languages',
-        title: 'Languages',
-    },
-];
-
-const childrenHandler = (value: TValue) => {
-    switch (value) {
-        case 'contacts':
-            return (
-                <Box>
-                    <AddContacts />
-                </Box>
-            );
-
-            break;
-        case 'tech-skills':
-            return (
-                <Box>
-                    <AddTechSkills />
-                </Box>
-            );
-            break;
-        case 'soft-skills':
-            return (
-                <Box>
-                    <AddSoftSkills />
-                </Box>
-            );
-            break;
-        case 'languages':
-            return (
-                <Box>
-                    <AddLanguages />
-                </Box>
-            );
-            break;
-
-        default:
-            return null;
+const childrenHandler = (
+    actionName: TActionName,
+    ariaLabel: string,
+    title: TTitle,
+    onClickHandler: (actionName: string) => void
+) => {
+    if (actionName === 'contacts') {
+        return <AddContacts onClickHandler={onClickHandler} />;
+    } else {
+        return (
+            <AddButton
+                ariaLabel={ariaLabel}
+                actionName={actionName}
+                onClickHandler={onClickHandler}
+            >
+                {`Add ${title}`}
+            </AddButton>
+        );
     }
 };
 
 export function CustomizedAccordion() {
+    const [actionName, setActionName] = useState<string | null>(null);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<string | false>(false);
     const { access } = useSelector(selectAuth);
+    const { loading } = useSelector(selectData);
+
+    const onClickHandler = (actionName: string) => {
+        setOpenModal(true);
+        setActionName(actionName);
+    };
 
     useEffect(() => {
         if (access !== 0) {
@@ -97,17 +62,32 @@ export function CustomizedAccordion() {
 
     return (
         <Box sx={{ mt: 2 }}>
-            {items.map(({ value, title }) => (
-                <CustomizedAccordionItem
-                    key={value}
-                    expanded={expanded}
-                    handleChange={handleChange}
-                    value={value}
-                    title={title}
-                >
-                    {childrenHandler(value)}
-                </CustomizedAccordionItem>
+            {items.map(({ actionName, title, ariaLabel }) => (
+                <Box key={actionName}>
+                    <CustomizedAccordionItem
+                        expanded={expanded}
+                        handleChange={handleChange}
+                        value={actionName}
+                        title={title}
+                    >
+                        {childrenHandler(
+                            actionName,
+                            ariaLabel,
+                            title,
+                            onClickHandler
+                        )}
+                    </CustomizedAccordionItem>
+                    <Spinner loading={loading} />
+                    {loading === 'succeeded' && (
+                        <PaperItems actionName={actionName} />
+                    )}
+                </Box>
             ))}
+            <NestedModal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                actionName={actionName}
+            />
         </Box>
     );
 }

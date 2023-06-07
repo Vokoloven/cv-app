@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 import { themingSlice, persistedThemingReducer } from './themingSlice';
 import { userAuthSlice, persistedAuthReducer } from './authSlice';
+import { getDataSlice } from './getDataSlice';
 import { persistStore } from 'redux-persist';
 
 const rootReducer = combineReducers({
     [userAuthSlice.name]: persistedAuthReducer,
     [themingSlice.name]: persistedThemingReducer,
+    [getDataSlice.name]: getDataSlice.reducer,
 });
 
 export const store = configureStore({

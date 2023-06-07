@@ -1,39 +1,38 @@
+// import { useSelector } from 'react-redux';
+// import { selectData } from 'redux/getDataSlice';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { SetStateAction, Dispatch } from 'react';
-import { ModalButton } from 'components/Buttons';
 import { Forms } from 'components/Forms/';
+import { ModalButton } from 'components/Buttons';
+import { firebaseSetDoc } from 'firebase/';
+import { TSetStateBoolean } from 'types/globalTypes';
+import { AppDispatch } from 'redux/store';
+
+export type TInput<T> = {
+    [x: string]: T;
+};
 
 type TProps = {
     openModal: boolean;
-    setOpenModal: Dispatch<SetStateAction<boolean>>;
+    setOpenModal: TSetStateBoolean;
     actionName: string | null;
-};
-
-type TInput<T> = {
-    [x: string]: T;
 };
 
 const buttons: Readonly<'Cancel' | 'Ok'>[] = ['Cancel', 'Ok'];
 
-export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
+export const NestedModal = ({
+    openModal,
+    setOpenModal,
+    actionName,
+}: TProps) => {
+    // const { data } = useSelector(selectData);
     const [input, setInput] = useState<TInput<string>>({});
-
-    const closeModal = (
-        event: React.SyntheticEvent<unknown>,
-        reason?: string
-    ) => {
-        const { textContent } = event.currentTarget as HTMLElement;
-        //Here Should be Send Request
-        if (reason !== 'backdropClick') {
-            setOpenModal(false);
-        }
-        setInput({});
-    };
+    const dispatch = useDispatch<AppDispatch>();
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = {
@@ -43,30 +42,41 @@ export const Modal = ({ openModal, setOpenModal, actionName }: TProps) => {
         setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
     };
 
-    console.log(input);
+    const closeModal = (value: 'Cancel' | 'Ok') => {
+        setOpenModal(false);
+        if (value === 'Ok') {
+            firebaseSetDoc(actionName, input, dispatch);
+        }
+        setInput({});
+    };
 
     return (
         <Box>
             <Dialog
-                disableEscapeKeyDown
                 open={openModal}
                 onClose={closeModal}
                 disableRestoreFocus
+                scroll={'paper'}
             >
-                <DialogTitle>Fill the form</DialogTitle>
+                <DialogTitle>
+                    Fill the "{actionName?.toUpperCase()}" Form
+                </DialogTitle>
                 <DialogContent>
-                    <Box
-                        onChange={onChangeHandler}
-                        component="form"
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <Forms actionName={actionName} />
-                    </Box>
+                    <Forms
+                        actionName={actionName}
+                        onChangeHandler={onChangeHandler}
+                        input={input}
+                    />
                 </DialogContent>
-                <DialogActions>
+                <DialogActions
+                    sx={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'space-around',
+                        mt: 2,
+                        pb: 2,
+                    }}
+                >
                     {buttons.map((button) => (
                         <ModalButton
                             key={button}

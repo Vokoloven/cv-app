@@ -1,17 +1,9 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
-type TItems = {
-    firstName: string;
-    secondName: string;
-    position: string;
-};
-
-const typographyItems: TItems = {
-    firstName: 'Ruslan',
-    secondName: 'Volovenko',
-    position: 'Junior Frontend Developer',
-};
+import { useRequiredDoc } from 'hooks/useRequiredDoc';
+import { Spinner } from 'components/Spinner/Spinner';
+import { useSelector } from 'react-redux';
+import { selectData } from 'redux/getDataSlice';
 
 const sxItems = () => {
     return {
@@ -21,17 +13,25 @@ const sxItems = () => {
 };
 
 export const Person = () => {
+    const { firstName, secondName, position } = useRequiredDoc('Name');
+    const { loading } = useSelector(selectData);
+
     return (
         <Box>
-            <Typography variant={'h2'} sx={sxItems()}>
-                {typographyItems.secondName}
-            </Typography>
-            <Typography variant={'h2'} sx={sxItems()}>
-                {typographyItems.firstName}
-            </Typography>
-            <Typography variant={'h5'} component={'h1'} sx={sxItems()}>
-                {typographyItems.position}
-            </Typography>
+            <Spinner loading={loading} />
+            {loading === 'succeeded' && (
+                <Box>
+                    <Typography variant={'h2'} sx={sxItems()}>
+                        {firstName}
+                    </Typography>
+                    <Typography variant={'h2'} sx={sxItems()}>
+                        {secondName}
+                    </Typography>
+                    <Typography variant={'h5'} component={'h1'} sx={sxItems()}>
+                        {position}
+                    </Typography>
+                </Box>
+            )}
         </Box>
     );
 };

@@ -30,13 +30,16 @@ export const sxSpeedDial = () => {
                 ? {
                       color: `${theme.palette.primary.button.complementary}`,
                       '&:hover': {
-                          bgcolor: `${theme.palette.primary.button.analogous.complementary}`,
+                          bgcolor: `${theme.palette.primary.button.triadic.primary}`,
                       },
                   }
                 : {
+                      bgcolor: `${theme.palette.primary.button.triadic.complementary}`,
+                      backgroundImage: `${theme.palette.primary.background.linearGradient}`,
                       color: `${theme.palette.primary.button.primary}`,
                       '&:hover': {
-                          bgcolor: `${theme.palette.primary.button.analogous.primary}`,
+                          bgcolor: `${theme.palette.primary.button.triadic.complementary}`,
+                          backgroundImage: `${theme.palette.primary.background.linearGradient}`,
                       },
                   }),
         },

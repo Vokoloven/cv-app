@@ -13,10 +13,10 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import { useCustomLocation } from 'hooks/useCustomLocation';
 import { actionsHandler } from './actionsHandler';
-import { Modal } from 'components/Modal';
 import { useSelector } from 'react-redux';
 import { selectTheming } from 'redux/themingSlice/selectTheming';
 import { selectAuth } from 'redux/authSlice/selectAuth';
+import { NestedModal } from 'components/Modal/NestedModal';
 
 type TActions = { icon: JSX.Element; name: string };
 
@@ -38,9 +38,9 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
     const { uploadButton } = useSelector(selectTheming);
     const { access } = useSelector(selectAuth);
 
-    const onClickHandler = (value: string) => {
+    const onClickHandler = (actionName: string) => {
         handleClose();
-        setActionName(value);
+        setActionName(actionName);
         setOpenModal(true);
     };
 
@@ -95,7 +95,7 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                             )
                         )}
                     </SpeedDial>
-                    <Modal
+                    <NestedModal
                         openModal={openModal}
                         setOpenModal={setOpenModal}
                         actionName={actionName}
