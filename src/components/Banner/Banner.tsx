@@ -38,10 +38,16 @@ export const Banner = () => {
                         <Typography
                             variant={'h3'}
                             component={'h2'}
-                            sx={{
+                            sx={(theme) => ({
                                 ml: 2,
-                                color: 'primary.typography.text.primary',
-                            }}
+                                ...(theme.palette.mode === 'light'
+                                    ? {
+                                          color: 'primary.typography.text.primary',
+                                      }
+                                    : {
+                                          color: 'primary.typography.text.complementary',
+                                      }),
+                            })}
                         >
                             {name}
                         </Typography>

@@ -8,7 +8,7 @@ const nameFields: TFields = [
     { id: 'position', label: 'Position' },
 ];
 
-const summaryFields: TFields = [{ id: 'description', label: 'Description' }];
+const summaryFields: TFields = [{ id: 'Summary', label: 'Summary' }];
 
 const projectsFields: TFields = [
     { id: 'repo', label: 'Repo' },
@@ -22,7 +22,7 @@ const experienceFields: TFields = [
     { id: 'period', label: 'Period' },
 ];
 
-const experienceFieldsItems: TFields = [{ id: 'item', label: 'Item' }];
+// const experienceFieldsItems: TFields = [{ id: 'item', label: 'Item' }];
 
 const educationFields: TFields = [
     { id: 'institution', label: 'Institution' },
@@ -42,7 +42,7 @@ const telegramFields: TFields = [{ id: 'telegram', label: 'Telegram' }];
 
 const techSkillsFields: TFields = [{ id: 'techSkills', label: 'Tech Skills' }];
 
-const softSkillsFields: TFields = [{ id: 'softSkills ', label: 'Soft Skills' }];
+const softSkillsFields: TFields = [{ id: 'softSkills', label: 'Soft Skills' }];
 
 const languagesFields: TFields = [{ id: 'languages', label: 'Languages' }];
 

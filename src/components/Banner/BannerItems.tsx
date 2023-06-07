@@ -13,69 +13,54 @@ const sxItems = () => {
 };
 
 export const BannerItems = ({ name }: TProps) => {
-    const namesGuard = (name: string) => {
-        switch (name) {
-            case 'Summary':
-                return 'Summary';
-                break;
-            case 'Experience':
-                return 'Experience';
-                break;
+    const item = useRequiredDoc(name)?.[name];
 
-            case 'Education':
-                return 'Education';
-                break;
-
-            default:
-                return;
-                break;
-        }
-    };
-
-    const summary = useRequiredDoc(`${namesGuard(name)}`)?.description;
-    const experience = useRequiredDoc(`${namesGuard(name)}`)?.Experience;
-    const education = useRequiredDoc(`${namesGuard(name)}`)?.Education;
-
-    return (
-        <>
-            <Box sx={sxItems()}>
-                {!!summary && (
-                    <Typography variant={'body1'}>{summary}</Typography>
-                )}
-            </Box>
-            {!!experience &&
-                experience.map(({ id, title, period }: DocumentData) => (
-                    <Box sx={sxItems()} component={'ul'} key={id}>
-                        <Box component={'li'}>
-                            <Typography variant={'h6'}>{title}</Typography>
-                        </Box>
-                        <Box component={'li'}>
-                            <Typography variant={'body1'}>{period}</Typography>
-                        </Box>
+    const renderedItemsByValue = (name: string) => {
+        if (name === 'Summary') {
+            return (
+                <Box sx={sxItems()}>
+                    <Typography variant={'body1'}>{item}</Typography>
+                </Box>
+            );
+        } else if (name === 'Experience') {
+            return (
+                !!item &&
+                item.map(({ id, title, period }: DocumentData) => (
+                    <Box sx={sxItems()}>
+                        <Typography variant={'h6'} component={'h3'} key={id}>
+                            {title}
+                        </Typography>
+                        <Typography variant={'body1'}>{period}</Typography>
                     </Box>
-                ))}
-            {!!education &&
-                education.map(
+                ))
+            );
+        } else {
+            return (
+                !!item &&
+                item.map(
                     ({ id, degree, institution, period }: DocumentData) => (
-                        <Box sx={sxItems()} component={'ul'} key={id}>
-                            <Box component={'li'}>
-                                <Typography variant={'h6'}>
-                                    {institution}
-                                </Typography>
-                            </Box>
-                            <Box component={'li'}>
-                                <Typography variant={'body1'}>
-                                    {period}
-                                </Typography>
-                            </Box>
-                            <Box component={'li'}>
-                                <Typography variant={'body1'}>
-                                    {degree}
-                                </Typography>
+                        <Box key={id} sx={sxItems()}>
+                            <Typography variant={'h6'} component={'h3'}>
+                                {institution}
+                            </Typography>
+                            <Box component={'ul'}>
+                                <Box component={'li'}>
+                                    <Typography variant={'body1'}>
+                                        {period}
+                                    </Typography>
+                                </Box>
+                                <Box component={'li'}>
+                                    <Typography variant={'body1'}>
+                                        {degree}
+                                    </Typography>
+                                </Box>
                             </Box>
                         </Box>
                     )
-                )}
-        </>
-    );
+                )
+            );
+        }
+    };
+
+    return renderedItemsByValue(name);
 };

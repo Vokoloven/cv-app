@@ -8,6 +8,8 @@ import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
 import { NestedModal } from 'components/Modal/NestedModal';
 import { PaperItems } from '.';
+import { Spinner } from 'components/Spinner/Spinner';
+import { selectData } from 'redux/getDataSlice';
 
 const childrenHandler = (
     actionName: TActionName,
@@ -35,6 +37,7 @@ export function CustomizedAccordion() {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<string | false>(false);
     const { access } = useSelector(selectAuth);
+    const { loading } = useSelector(selectData);
 
     const onClickHandler = (actionName: string) => {
         setOpenModal(true);
@@ -59,11 +62,6 @@ export function CustomizedAccordion() {
 
     return (
         <Box sx={{ mt: 2 }}>
-            <NestedModal
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                actionName={actionName}
-            />
             {items.map(({ actionName, title, ariaLabel }) => (
                 <Box key={actionName}>
                     <CustomizedAccordionItem
@@ -79,9 +77,17 @@ export function CustomizedAccordion() {
                             onClickHandler
                         )}
                     </CustomizedAccordionItem>
-                    <PaperItems actionName={actionName} />
+                    <Spinner loading={loading} />
+                    {loading === 'succeeded' && (
+                        <PaperItems actionName={actionName} />
+                    )}
                 </Box>
             ))}
+            <NestedModal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                actionName={actionName}
+            />
         </Box>
     );
 }
