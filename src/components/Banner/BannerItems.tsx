@@ -26,8 +26,8 @@ export const BannerItems = ({ name }: TProps) => {
             return (
                 !!item &&
                 item.map(({ id, title, period }: DocumentData) => (
-                    <Box sx={sxItems()}>
-                        <Typography variant={'h6'} component={'h3'} key={id}>
+                    <Box sx={sxItems()} key={id}>
+                        <Typography variant={'h6'} component={'h3'}>
                             {title}
                         </Typography>
                         <Typography variant={'body1'}>{period}</Typography>

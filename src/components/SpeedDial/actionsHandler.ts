@@ -10,11 +10,11 @@ export const actionsHandler = (
 ) => {
     if (side === 'right') {
         return pathname === '/projects'
-            ? actions.filter((action: TActions) => action.name === 'Projects')
-            : actions.filter((action: TActions) => action.name !== 'Projects');
+            ? actions.filter((action: TActions) => action.name === 'projects')
+            : actions.filter((action: TActions) => action.name !== 'projects');
     } else if (side === 'left') {
         return pathname === '/projects'
-            ? actions.filter((action: TActions) => action.name === 'Projects')
-            : actions.filter((action: TActions) => action.name !== 'Projects');
+            ? actions.filter((action: TActions) => action.name === 'projects')
+            : actions.filter((action: TActions) => action.name !== 'projects');
     }
 };

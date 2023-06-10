@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
+import { useRef } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
@@ -11,6 +14,8 @@ import { TIcons } from './icons';
 import { capitalize } from 'helpers/capitalize';
 import { sxIcon } from './sxIcon';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
+import { AlertDialogSlide } from 'components/Dialog';
+import { firebaseDeleteArrayDoc } from 'firebase/firestoreDatabase';
 
 type TProps = {
     actionName: string;
@@ -28,13 +33,32 @@ type TItem = {
 };
 
 export const PaperItems = ({ actionName }: TProps) => {
-    const { phone } = useRequiredDoc('phone');
-    const { email } = useRequiredDoc('email');
-    const { github } = useRequiredDoc('github');
-    const { linkedin } = useRequiredDoc('linkedin');
-    const { telegram } = useRequiredDoc('telegram');
+    const [open, setOpen] = useState<boolean>(false);
+    const [id, setId] = useState<string | null>(null);
 
+    const isAvailable = useRef<boolean>(false);
     const items = useRequiredDoc(actionName)?.[actionName];
+    const phone = useRequiredDoc('phone')?.phone;
+    const email = useRequiredDoc('email')?.email;
+    const github = useRequiredDoc('github')?.github;
+    const linkedin = useRequiredDoc('linkedin')?.linkedin;
+    const telegram = useRequiredDoc('telegram')?.telegram;
+
+    const dispatch = useDispatch();
+
+    const handleOpen = (id?: string | null) => {
+        if (id) {
+            setId(id);
+        }
+        setOpen(true);
+    };
+
+    const handleClose = (value: 'Cancel' | 'Ok') => {
+        if (value === 'Ok') {
+            firebaseDeleteArrayDoc(actionName, items, id, dispatch);
+        }
+        setOpen(false);
+    };
 
     const contacts: TContacts[] = [
         {
@@ -64,20 +88,28 @@ export const PaperItems = ({ actionName }: TProps) => {
         },
     ];
 
+    ((contacts: TContacts[]) => {
+        const isData = contacts.some(({ data }) => data !== undefined);
+        if (isAvailable.current === false) {
+            isData ? (isAvailable.current = true) : null;
+            return;
+        }
+    })(contacts);
+
     const contactsItemsHandler = (name: TIcons, data: string) => {
-        if (name === 'phone') {
+        if (name === 'phone' && data) {
             return (
                 <Box component={'a'} href={`tel:${data}`} sx={{ ml: 1 }}>
                     <Typography>{data}</Typography>
                 </Box>
             );
-        } else if (name === 'email') {
+        } else if (name === 'email' && data) {
             return (
                 <Box component={'a'} href={`mailto:${data}`} sx={{ ml: 1 }}>
                     <Typography>{data}</Typography>
                 </Box>
             );
-        } else {
+        } else if (data) {
             return (
                 <Box
                     component={'a'}
@@ -95,55 +127,83 @@ export const PaperItems = ({ actionName }: TProps) => {
     const renderedItemsByValue = (actionName: string) => {
         if (actionName === 'contacts') {
             return (
-                <Box component={'ul'} sx={{ ml: 1, py: 2 }}>
-                    {contacts.map(({ icon, data, name }) => (
-                        <Box
-                            key={name}
-                            component={'li'}
-                            sx={{
-                                ml: 1,
-                                display: 'flex',
-                                '&:not(:last-child)': {
-                                    mb: 1,
-                                },
-                            }}
-                        >
-                            {data && icon}
-                            {contactsItemsHandler(name, data)}
-                        </Box>
-                    ))}
-                </Box>
+                isAvailable.current && (
+                    <Box
+                        component={'ul'}
+                        sx={{
+                            ml: 1,
+                            py: 1,
+                        }}
+                    >
+                        {contacts.map(
+                            ({ icon, data, name }) =>
+                                data && (
+                                    <Box
+                                        key={name}
+                                        component={'li'}
+                                        sx={{
+                                            display: 'flex',
+                                            '&:not(:last-child)': {
+                                                mb: 1,
+                                            },
+                                        }}
+                                    >
+                                        {data && (
+                                            <Box
+                                                sx={{ display: 'flex' }}
+                                                onClick={handleOpen.bind(
+                                                    null,
+                                                    name
+                                                )}
+                                            >
+                                                {icon}
+                                            </Box>
+                                        )}
+                                        {contactsItemsHandler(name, data)}
+                                    </Box>
+                                )
+                        )}
+                    </Box>
+                )
             );
         } else {
             return (
-                <Box component={'ul'} sx={{ ml: 1, py: 2 }}>
-                    {!!items &&
-                        items.map((item: TItem) => (
+                items?.length > 0 && (
+                    <Box component={'ul'} sx={{ ml: 1, py: 1 }}>
+                        {items.map((item: TItem) => (
                             <Box
                                 component={'li'}
                                 key={item?.id}
                                 sx={{
                                     ml: 1,
                                     display: 'flex',
-                                    '&:not(:last-child)': {
-                                        mb: 1,
-                                    },
                                 }}
                             >
-                                <LabelImportantIcon sx={sxIcon()} />
+                                <LabelImportantIcon
+                                    sx={sxIcon()}
+                                    onClick={handleOpen.bind(null, item?.id)}
+                                />
                                 <Typography variant={'body1'} sx={{ ml: 1 }}>
                                     {item?.[actionName]}
                                 </Typography>
                             </Box>
                         ))}
-                </Box>
+                    </Box>
+                )
             );
         }
     };
 
     return (
-        <Paper elevation={4} sx={{ mt: 1, mb: 2 }}>
-            {renderedItemsByValue(actionName)}
-        </Paper>
+        <>
+            <Paper elevation={4} sx={{ mt: 1, mb: 2 }}>
+                {renderedItemsByValue(actionName)}
+            </Paper>
+            <AlertDialogSlide
+                open={open}
+                handleClose={handleClose}
+                actionName={actionName}
+            />
+        </>
     );
 };

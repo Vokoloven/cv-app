@@ -5,12 +5,14 @@ import {
     collection,
     updateDoc,
     arrayUnion,
-    // DocumentData,
+    DocumentData,
+    deleteDoc,
 } from 'firebase/firestore';
 import { db } from 'firebase/';
 import { TInput } from 'components/Modal/NestedModal';
 import { AppDispatch } from 'redux/store';
 import { getFirestoreDatabase } from 'redux/service';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
 
 export const collectionName = import.meta.env.VITE_COLLECTION;
 
@@ -19,16 +21,21 @@ const firebaseArray: string[] = [
     'softSkills',
     'languages',
     'projects',
-    'Experience',
-    'Education',
+    'experience',
+    'education',
 ];
+
+const isArray = (firebaseArray: string[], actionName: string | null) => {
+    const isArray = firebaseArray.some((item) => item === actionName);
+
+    return isArray;
+};
 
 export const firebaseSetDoc = async (
     actionName: string | null,
     input: TInput<string>,
     dispatch: AppDispatch
 ) => {
-    const isArray = firebaseArray.some((item) => item === actionName);
     const collectionRef = collection(db, `${collectionName}`);
     const docRef = doc(collectionRef, `${actionName}`);
     const idRef = docRef.id;
@@ -36,7 +43,7 @@ export const firebaseSetDoc = async (
     const { id } = docRefDefaultId;
     const docSnap = await getDoc(docRef);
 
-    if (!isArray) {
+    if (!isArray(firebaseArray, actionName)) {
         await setDoc(docRef, { id, ...input });
     } else if (docSnap.exists()) {
         actionName &&
@@ -49,15 +56,31 @@ export const firebaseSetDoc = async (
     dispatch(getFirestoreDatabase(collectionName));
 };
 
-// export const firebaseDeleteDoc = async (actionName: string | null) => {
-//     const collectionRef = collection(db, `${collectionName}`);
-//     const docRef = doc(collectionRef, `${actionName}`);
-//     if (actionName) {
-//         const requiredDoc = data.find((doc: DocumentData) => doc?.[actionName]);
-//         const parsedDoc = requiredDoc?.[actionName]?.[actionName];
-//         const filteredDoc = parsedDoc.filter(
-//             ({ id }: DocumentData) => id !== 'S5f97B5QePdH4i7DkOwE'
-//         );
-//         await setDoc(docRef, { filteredDoc });
-//     }
-// };
+export const firebaseDeleteArrayDoc = async (
+    actionName: string | null,
+    data: DocumentData | null,
+    itemId: string | null,
+    dispatch: AppDispatch
+) => {
+    const collectionRef = collection(db, `${collectionName}`);
+    if (isArray(firebaseArray, actionName) && actionName) {
+        const docRef = doc(collectionRef, `${actionName}`);
+        const filteredDoc = data?.filter(
+            ({ id }: DocumentData) => id !== itemId
+        );
+        await setDoc(docRef, { [actionName]: filteredDoc });
+    } else if (actionName === 'photo') {
+        const storage = getStorage();
+        const photoRef = ref(storage, `${itemId}`);
+        const docRef = doc(collectionRef, `${actionName}`);
+        await deleteObject(photoRef)
+            .then(async () => await deleteDoc(docRef))
+            .catch((error) =>
+                console.log(`Uh-oh, an error occurred! ${error}`)
+            );
+    } else {
+        const docRef = doc(collectionRef, `${itemId}`);
+        await deleteDoc(docRef);
+    }
+    dispatch(getFirestoreDatabase(collectionName));
+};

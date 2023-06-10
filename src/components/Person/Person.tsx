@@ -13,7 +13,8 @@ const sxItems = () => {
 };
 
 export const Person = () => {
-    const { firstName, secondName, position } = useRequiredDoc('Name');
+    const name = useRequiredDoc('name');
+
     const { loading } = useSelector(selectData);
 
     return (
@@ -22,13 +23,13 @@ export const Person = () => {
             {loading === 'succeeded' && (
                 <Box>
                     <Typography variant={'h2'} sx={sxItems()}>
-                        {firstName}
+                        {name?.firstName}
                     </Typography>
                     <Typography variant={'h2'} sx={sxItems()}>
-                        {secondName}
+                        {name?.secondName}
                     </Typography>
                     <Typography variant={'h5'} component={'h1'} sx={sxItems()}>
-                        {position}
+                        {name?.position}
                     </Typography>
                 </Box>
             )}

@@ -22,7 +22,7 @@ const experienceFields: TFields = [
     { id: 'period', label: 'Period' },
 ];
 
-// const experienceFieldsItems: TFields = [{ id: 'item', label: 'Item' }];
+// const experienceFieldsItems: TFields = [{ id: 'experienceItems', label: 'Experience Job List' }];
 
 const educationFields: TFields = [
     { id: 'institution', label: 'Institution' },
@@ -46,12 +46,14 @@ const softSkillsFields: TFields = [{ id: 'softSkills', label: 'Soft Skills' }];
 
 const languagesFields: TFields = [{ id: 'languages', label: 'Languages' }];
 
+const cvFields: TFields = [{ id: 'cv', label: 'CV' }];
+
 export const dataFields: { name: string; fields: TFields }[] = [
-    { name: 'Name', fields: nameFields },
-    { name: 'Summary', fields: summaryFields },
-    { name: 'Projects', fields: projectsFields },
-    { name: 'Experience', fields: experienceFields },
-    { name: 'Education', fields: educationFields },
+    { name: 'name', fields: nameFields },
+    { name: 'summary', fields: summaryFields },
+    { name: 'projects', fields: projectsFields },
+    { name: 'experience', fields: experienceFields },
+    { name: 'education', fields: educationFields },
     { name: 'phone', fields: phoneFields },
     { name: 'email', fields: emailFields },
     { name: 'github', fields: gitHubFields },
@@ -60,4 +62,5 @@ export const dataFields: { name: string; fields: TFields }[] = [
     { name: 'techSkills', fields: techSkillsFields },
     { name: 'softSkills', fields: softSkillsFields },
     { name: 'languages', fields: languagesFields },
+    { name: 'cv', fields: cvFields },
 ];

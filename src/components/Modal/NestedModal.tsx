@@ -56,6 +56,7 @@ export const NestedModal = ({
                 open={openModal}
                 onClose={closeModal}
                 disableRestoreFocus
+                aria-describedby="dialog add items"
                 scroll={'paper'}
             >
                 <DialogTitle>

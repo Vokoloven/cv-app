@@ -17,15 +17,18 @@ import { useSelector } from 'react-redux';
 import { selectTheming } from 'redux/themingSlice/selectTheming';
 import { selectAuth } from 'redux/authSlice/selectAuth';
 import { NestedModal } from 'components/Modal/NestedModal';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import { capitalize } from '@mui/material';
 
 type TActions = { icon: JSX.Element; name: string };
 
 const actions: TActions[] = [
-    { icon: <PersonIcon />, name: 'Name' },
-    { icon: <InfoIcon />, name: 'Summary' },
-    { icon: <AccountTreeIcon />, name: 'Projects' },
-    { icon: <WorkIcon />, name: 'Experience' },
-    { icon: <SchoolIcon />, name: 'Education' },
+    { icon: <PersonIcon />, name: 'name' },
+    { icon: <InfoIcon />, name: 'summary' },
+    { icon: <AccountTreeIcon />, name: 'projects' },
+    { icon: <WorkIcon />, name: 'experience' },
+    { icon: <SchoolIcon />, name: 'education' },
+    { icon: <CloudDownloadIcon />, name: 'cv' },
 ];
 
 export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
@@ -85,7 +88,11 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                                 <SpeedDialAction
                                     key={action.name}
                                     icon={action.icon}
-                                    tooltipTitle={action.name}
+                                    tooltipTitle={
+                                        action.name === 'cv'
+                                            ? action.name?.toUpperCase()
+                                            : capitalize(action.name)
+                                    }
                                     tooltipOpen
                                     onClick={onClickHandler.bind(
                                         null,

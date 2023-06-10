@@ -14,10 +14,10 @@ export const getFirestoreDatabase = createAsyncThunk(
                             collection(db, `${collectionName}`)
                         );
 
-                        if (querySnapshot.empty) {
+                        if (querySnapshot?.empty) {
                             throw new Error('Document not found');
                         } else {
-                            querySnapshot.forEach((doc) => {
+                            querySnapshot?.forEach((doc) => {
                                 data.push({ [doc.id]: doc.data() });
                             });
 
