@@ -53,7 +53,7 @@ export const firebaseSetDoc = async (
     } else {
         await setDoc(docRef, { [idRef]: [{ id, ...input }] });
     }
-    dispatch(getFirestoreDatabase(collectionName));
+    await dispatch(getFirestoreDatabase(collectionName));
 };
 
 export const firebaseDeleteArrayDoc = async (
@@ -69,18 +69,17 @@ export const firebaseDeleteArrayDoc = async (
             ({ id }: DocumentData) => id !== itemId
         );
         await setDoc(docRef, { [actionName]: filteredDoc });
+        await dispatch(getFirestoreDatabase(collectionName));
     } else if (actionName === 'photo') {
         const storage = getStorage();
         const photoRef = ref(storage, `${itemId}`);
         const docRef = doc(collectionRef, `${actionName}`);
-        await deleteObject(photoRef)
-            .then(async () => await deleteDoc(docRef))
-            .catch((error) =>
-                console.log(`Uh-oh, an error occurred! ${error}`)
-            );
+        await deleteDoc(docRef);
+        await dispatch(getFirestoreDatabase(collectionName));
+        await deleteObject(photoRef);
     } else {
         const docRef = doc(collectionRef, `${itemId}`);
         await deleteDoc(docRef);
+        await dispatch(getFirestoreDatabase(collectionName));
     }
-    dispatch(getFirestoreDatabase(collectionName));
 };
