@@ -6,9 +6,9 @@ export const sxSpeedDial = () => {
             ...(theme.palette.mode === 'light'
                 ? {
                       color: `${theme.palette.primary.button.triadic.primary}`,
-                      bgcolor: `${theme.palette.primary.button.complementary}`,
+                      bgcolor: `${theme.palette.primary.button.primary}`,
                       '&:hover': {
-                          bgcolor: `${theme.palette.primary.button.complementary}`,
+                          bgcolor: `${theme.palette.primary.button.primary}`,
                       },
                   }
                 : {

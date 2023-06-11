@@ -5,6 +5,10 @@ import { Spinner } from 'components/Spinner/Spinner';
 import { useSelector } from 'react-redux';
 import { selectData } from 'redux/getDataSlice';
 
+type TProps = {
+    side: 'right' | 'left';
+};
+
 const sxItems = () => {
     return {
         ml: 2,
@@ -12,13 +16,21 @@ const sxItems = () => {
     };
 };
 
-export const Person = () => {
+export const Person = ({ side }: TProps) => {
     const name = useRequiredDoc('name');
 
     const { loading } = useSelector(selectData);
 
     return (
-        <Box>
+        <Box
+            sx={(theme) => ({
+                ...(side === 'left' && {
+                    [theme.breakpoints.up('tablet')]: {
+                        display: 'none',
+                    },
+                }),
+            })}
+        >
             <Spinner loading={loading} />
             {loading === 'succeeded' && (
                 <Box>

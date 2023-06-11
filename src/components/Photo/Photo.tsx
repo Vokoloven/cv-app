@@ -128,6 +128,7 @@ export const Photo = () => {
                 open={open}
                 handleClose={handleClose}
                 actionName={'photo'}
+                name={'photo'}
             />
         </Box>
     );

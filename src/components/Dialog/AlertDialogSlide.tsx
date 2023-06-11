@@ -15,6 +15,7 @@ type TProps = {
     open: boolean;
     actionName: string | null;
     handleClose: (value: 'Cancel' | 'Ok') => void;
+    name: string | null;
 };
 
 const Transition = React.forwardRef(function Transition(
@@ -26,7 +27,12 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const AlertDialogSlide = ({ open, handleClose, actionName }: TProps) => {
+export const AlertDialogSlide = ({
+    open,
+    handleClose,
+    actionName,
+    name,
+}: TProps) => {
     const { access } = useSelector(selectAuth);
 
     const accessHandler = (access: number, open: boolean) => {
@@ -47,10 +53,12 @@ export const AlertDialogSlide = ({ open, handleClose, actionName }: TProps) => {
                 aria-describedby="dialog delete items"
                 disableRestoreFocus
             >
-                <DialogTitle>Delete {`"${actionName}"`}</DialogTitle>
+                <DialogTitle>
+                    Delete {`"${actionName?.toUpperCase()}"`}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        You are sure want to delete this "{`${actionName}`}"?
+                        You are sure want to delete field "{name && name}"?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

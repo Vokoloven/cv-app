@@ -34,6 +34,7 @@ type TItem = {
 
 export const PaperItems = ({ actionName }: TProps) => {
     const [open, setOpen] = useState<boolean>(false);
+    const [name, setName] = useState<string | null>(null);
     const [id, setId] = useState<string | null>(null);
 
     const isAvailable = useRef<boolean>(false);
@@ -46,10 +47,12 @@ export const PaperItems = ({ actionName }: TProps) => {
 
     const dispatch = useDispatch();
 
-    const handleOpen = (id?: string | null) => {
-        if (id) {
+    const handleOpen = (id?: string | null, name?: string | null) => {
+        if (id && name) {
             setId(id);
+            setName(name);
         }
+
         setOpen(true);
     };
 
@@ -153,6 +156,7 @@ export const PaperItems = ({ actionName }: TProps) => {
                                                 sx={{ display: 'flex' }}
                                                 onClick={handleOpen.bind(
                                                     null,
+                                                    name,
                                                     name
                                                 )}
                                             >
@@ -181,7 +185,11 @@ export const PaperItems = ({ actionName }: TProps) => {
                             >
                                 <LabelImportantIcon
                                     sx={sxIcon()}
-                                    onClick={handleOpen.bind(null, item?.id)}
+                                    onClick={handleOpen.bind(
+                                        null,
+                                        item?.id,
+                                        item?.[actionName]
+                                    )}
                                 />
                                 <Typography variant={'body1'} sx={{ ml: 1 }}>
                                     {item?.[actionName]}
@@ -203,6 +211,7 @@ export const PaperItems = ({ actionName }: TProps) => {
                 open={open}
                 handleClose={handleClose}
                 actionName={actionName}
+                name={name}
             />
         </>
     );

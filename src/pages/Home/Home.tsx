@@ -10,13 +10,14 @@ export const Home = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <BoxWrapper side={'left'} page={'home'}>
                 <Box sx={{ mt: 2 }}>
+                    <Person side={'left'} />
                     <Photo />
                     <CustomizedAccordion />
                 </Box>
             </BoxWrapper>
             <BoxWrapper side={'right'} page={'home'}>
                 <Box sx={{ mt: 2 }}>
-                    <Person />
+                    <Person side={'right'} />
                     <Banner />
                 </Box>
             </BoxWrapper>
