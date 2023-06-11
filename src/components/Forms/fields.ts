@@ -8,7 +8,7 @@ const nameFields: TFields = [
     { id: 'position', label: 'Position' },
 ];
 
-const summaryFields: TFields = [{ id: 'Summary', label: 'Summary' }];
+const summaryFields: TFields = [{ id: 'summary', label: 'Summary' }];
 
 const projectsFields: TFields = [
     { id: 'repo', label: 'Repo' },

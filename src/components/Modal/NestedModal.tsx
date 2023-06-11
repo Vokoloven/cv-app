@@ -1,5 +1,3 @@
-// import { useSelector } from 'react-redux';
-// import { selectData } from 'redux/getDataSlice';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
@@ -30,7 +28,6 @@ export const NestedModal = ({
     setOpenModal,
     actionName,
 }: TProps) => {
-    // const { data } = useSelector(selectData);
     const [input, setInput] = useState<TInput<string>>({});
     const dispatch = useDispatch<AppDispatch>();
 

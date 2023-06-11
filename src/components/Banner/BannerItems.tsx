@@ -13,7 +13,7 @@ const sxItems = () => {
 };
 
 export const BannerItems = ({ name }: TProps) => {
-    const item = useRequiredDoc(name)?.[name];
+    const item = useRequiredDoc(name.toLowerCase())?.[name.toLowerCase()];
 
     const renderedItemsByValue = (name: string) => {
         if (name === 'Summary') {

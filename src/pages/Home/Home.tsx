@@ -7,7 +7,12 @@ import { Person } from 'components/Person';
 
 export const Home = () => {
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+            }}
+        >
             <BoxWrapper side={'left'} page={'home'}>
                 <Box sx={{ mt: 2 }}>
                     <Person side={'left'} />

@@ -12,6 +12,10 @@ export const multilineHanlder = (id: string) => {
             return true;
             break;
 
+        case 'summary':
+            return true;
+            break;
+
         default:
             return false;
             break;
