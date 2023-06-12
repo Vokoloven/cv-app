@@ -30,7 +30,7 @@ export const Photo = () => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteDoc('photo', null, path, dispatch);
+            firebaseDeleteDoc('photo', null, null, path, dispatch);
         }
 
         setOpen(false);
@@ -38,14 +38,11 @@ export const Photo = () => {
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target?.files?.[0];
-
         const storage = getStorage();
         const storageRef = ref(storage, `images/${file?.name}`);
 
         if (file) {
             uploadBytes(storageRef, file).then((snapshot) => {
-                // console.log('Uploaded a blob or file!');
-                // console.log(snapshot);
                 snapshot &&
                     getDownloadURL(ref(storage, `images/${file?.name}`)).then(
                         (url) => {
@@ -86,7 +83,6 @@ export const Photo = () => {
                             <input
                                 hidden
                                 accept="image/*"
-                                multiple
                                 type="file"
                                 onChange={onChangeHandler}
                             />

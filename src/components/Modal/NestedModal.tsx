@@ -10,6 +10,7 @@ import { ModalButton } from 'components/Buttons';
 import { firebaseSetDoc } from 'firebase/';
 import { TSetStateBoolean } from 'types/globalTypes';
 import { AppDispatch } from 'redux/store';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export type TInput<T> = {
     [x: string]: T;
@@ -33,10 +34,28 @@ export const NestedModal = ({
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = {
-            [e.target.id]: e.target.value,
+            ...(e.target.id !== '' && { [e.target.id]: e.target.value }),
         };
-
         setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
+
+        const file = e.target?.files?.[0];
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${file?.name}`);
+
+        if (file) {
+            uploadBytes(storageRef, file).then((snapshot) => {
+                snapshot &&
+                    getDownloadURL(ref(storage, `images/${file?.name}`)).then(
+                        (url) => {
+                            setInput((prevState: TInput<string>) => ({
+                                ...prevState,
+                                photo: url,
+                                path: `images/${file?.name}`,
+                            }));
+                        }
+                    );
+            });
+        }
     };
 
     const closeModal = (value: 'Cancel' | 'Ok') => {

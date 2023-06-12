@@ -58,7 +58,7 @@ export const PaperItems = ({ actionName }: TProps) => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteDoc(actionName, items, id, dispatch);
+            firebaseDeleteDoc(actionName, items, id, null, dispatch);
         }
         setOpen(false);
     };

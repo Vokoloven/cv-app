@@ -11,6 +11,7 @@ const nameFields: TFields = [
 const summaryFields: TFields = [{ id: 'summary', label: 'Summary' }];
 
 const projectsFields: TFields = [
+    { id: 'projectName', label: 'Project Name' },
     { id: 'repo', label: 'Repo' },
     { id: 'link', label: 'Link' },
     { id: 'tools', label: 'Tools' },

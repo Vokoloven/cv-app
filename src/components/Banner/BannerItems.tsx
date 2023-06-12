@@ -44,7 +44,7 @@ export const BannerItems = ({ actionName }: TProps) => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteDoc(actionName, items, id, dispatch);
+            firebaseDeleteDoc(actionName, items, id, null, dispatch);
         }
         setOpen(false);
     };
@@ -73,7 +73,7 @@ export const BannerItems = ({ actionName }: TProps) => {
                     <Box sx={sxItems()}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant={'body1'}>{items}</Typography>
-                            {isRenderDeleteButton(actionName, actionName)}
+                            {isRenderDeleteButton(null, actionName)}
                         </Box>
                     </Box>
                 )

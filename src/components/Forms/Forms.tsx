@@ -4,6 +4,8 @@ import { fieldsHandler } from './fieldsHandler';
 import { sxFormsProps } from './sxFormsProps';
 import { TInput } from 'components/Modal/NestedModal';
 import { multilineHanlder } from './multilineHandler';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import IconButton from '@mui/material/IconButton';
 
 type TProps = {
     actionName: string | null;
@@ -33,6 +35,17 @@ export const Forms = ({ actionName, onChangeHandler, input }: TProps) => {
                         value={input[id] ?? ''}
                     />
                 ))}
+                {actionName === 'projects' && (
+                    <Box sx={{ mt: 1 }}>
+                        <IconButton
+                            component={'label'}
+                            aria-label={'upload picture button'}
+                        >
+                            <input hidden type={'file'} accept={'image/*'} />
+                            <AddPhotoAlternateIcon />
+                        </IconButton>
+                    </Box>
+                )}
             </Box>
         </Box>
     );

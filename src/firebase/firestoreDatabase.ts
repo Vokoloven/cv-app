@@ -31,6 +31,18 @@ const isArray = (firebaseArray: string[], actionName: string | null) => {
     return isArray;
 };
 
+const deleteStoragePhoto = async (
+    actionName: string | null,
+    path: string | null
+) => {
+    const storage = getStorage();
+
+    if (actionName === 'photo' || actionName === 'projects') {
+        const photoRef = ref(storage, `${path}`);
+        await deleteObject(photoRef);
+    }
+};
+
 export const firebaseSetDoc = async (
     actionName: string | null,
     input: TInput<string>,
@@ -60,26 +72,24 @@ export const firebaseDeleteDoc = async (
     actionName: string | null,
     data: DocumentData | null,
     itemId: string | null,
+    path: string | null,
     dispatch: AppDispatch
 ) => {
     const collectionRef = collection(db, `${collectionName}`);
+
     if (isArray(firebaseArray, actionName) && actionName) {
         const docRef = doc(collectionRef, `${actionName}`);
+
         const filteredDoc = data?.filter(
             ({ id }: DocumentData) => id !== itemId
         );
         await setDoc(docRef, { [actionName]: filteredDoc });
         await dispatch(getFirestoreDatabase(collectionName));
-    } else if (actionName === 'photo') {
-        const storage = getStorage();
-        const photoRef = ref(storage, `${itemId}`);
+        deleteStoragePhoto(actionName, path);
+    } else {
         const docRef = doc(collectionRef, `${actionName}`);
         await deleteDoc(docRef);
         await dispatch(getFirestoreDatabase(collectionName));
-        await deleteObject(photoRef);
-    } else {
-        const docRef = doc(collectionRef, `${itemId}`);
-        await deleteDoc(docRef);
-        await dispatch(getFirestoreDatabase(collectionName));
+        deleteStoragePhoto(actionName, path);
     }
 };
