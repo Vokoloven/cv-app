@@ -73,7 +73,7 @@ export const BannerItems = ({ actionName }: TProps) => {
                     <Box sx={sxItems()}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant={'body1'}>{items}</Typography>
-                            {isRenderDeleteButton(null, actionName)}
+                            {isRenderDeleteButton(actionName, actionName)}
                         </Box>
                     </Box>
                 )
