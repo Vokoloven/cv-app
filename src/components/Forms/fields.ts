@@ -8,10 +8,9 @@ const nameFields: TFields = [
     { id: 'position', label: 'Position' },
 ];
 
-const summaryFields: TFields = [{ id: 'summary', label: 'Summary' }];
+const summaryFields: TFields = [{ id: 'Summary', label: 'Summary' }];
 
 const projectsFields: TFields = [
-    { id: 'projectName', label: 'Project Name' },
     { id: 'repo', label: 'Repo' },
     { id: 'link', label: 'Link' },
     { id: 'tools', label: 'Tools' },
@@ -22,6 +21,8 @@ const experienceFields: TFields = [
     { id: 'title', label: 'Title' },
     { id: 'period', label: 'Period' },
 ];
+
+// const experienceFieldsItems: TFields = [{ id: 'item', label: 'Item' }];
 
 const educationFields: TFields = [
     { id: 'institution', label: 'Institution' },
@@ -45,14 +46,12 @@ const softSkillsFields: TFields = [{ id: 'softSkills', label: 'Soft Skills' }];
 
 const languagesFields: TFields = [{ id: 'languages', label: 'Languages' }];
 
-const cvFields: TFields = [{ id: 'cv', label: 'CV' }];
-
 export const dataFields: { name: string; fields: TFields }[] = [
-    { name: 'name', fields: nameFields },
-    { name: 'summary', fields: summaryFields },
-    { name: 'projects', fields: projectsFields },
-    { name: 'experience', fields: experienceFields },
-    { name: 'education', fields: educationFields },
+    { name: 'Name', fields: nameFields },
+    { name: 'Summary', fields: summaryFields },
+    { name: 'Projects', fields: projectsFields },
+    { name: 'Experience', fields: experienceFields },
+    { name: 'Education', fields: educationFields },
     { name: 'phone', fields: phoneFields },
     { name: 'email', fields: emailFields },
     { name: 'github', fields: gitHubFields },
@@ -61,5 +60,4 @@ export const dataFields: { name: string; fields: TFields }[] = [
     { name: 'techSkills', fields: techSkillsFields },
     { name: 'softSkills', fields: softSkillsFields },
     { name: 'languages', fields: languagesFields },
-    { name: 'cv', fields: cvFields },
 ];
