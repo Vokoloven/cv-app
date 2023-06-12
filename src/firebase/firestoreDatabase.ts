@@ -56,7 +56,7 @@ export const firebaseSetDoc = async (
     await dispatch(getFirestoreDatabase(collectionName));
 };
 
-export const firebaseDeleteArrayDoc = async (
+export const firebaseDeleteDoc = async (
     actionName: string | null,
     data: DocumentData | null,
     itemId: string | null,

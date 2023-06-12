@@ -52,7 +52,7 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
             return (
                 <Box
                     sx={(theme) => ({
-                        position: 'absolute',
+                        position: 'fixed',
                         right: 0,
                         top: '100px',
                         height: 330,
@@ -71,6 +71,9 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                                 display: 'none',
                             },
                         }),
+                        [theme.breakpoints.up('desktop')]: {
+                            right: 'calc(50% - 700px)',
+                        },
                     })}
                 >
                     <SpeedDial

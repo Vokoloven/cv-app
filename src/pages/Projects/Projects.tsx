@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import { BoxWrapper } from 'components/BoxWrapper';
 import { Photo } from 'components/Photo/Photo';
 import { CustomizedAccordion } from 'components/Accordion';
+import { ProjectsItems } from '.';
 
 export const Projects = () => {
     return (
@@ -13,7 +14,9 @@ export const Projects = () => {
                 </Box>
             </BoxWrapper>
             <BoxWrapper side={'right'} page={'projects'}>
-                <Box sx={{ mt: 2 }}>Projects</Box>
+                <Box sx={{ mt: 2 }}>
+                    <ProjectsItems />
+                </Box>
             </BoxWrapper>
         </Box>
     );

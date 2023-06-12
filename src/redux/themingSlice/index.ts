@@ -5,4 +5,12 @@ import {
     hideButton,
 } from './themingSlice';
 
-export { themingSlice, persistedThemingReducer, colorModeSwitcher, hideButton };
+import { selectTheming } from './selectTheming';
+
+export {
+    themingSlice,
+    persistedThemingReducer,
+    colorModeSwitcher,
+    hideButton,
+    selectTheming,
+};

@@ -15,7 +15,7 @@ import { capitalize } from 'helpers/capitalize';
 import { sxIcon } from './sxIcon';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { AlertDialogSlide } from 'components/Dialog';
-import { firebaseDeleteArrayDoc } from 'firebase/firestoreDatabase';
+import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
 
 type TProps = {
     actionName: string;
@@ -58,7 +58,7 @@ export const PaperItems = ({ actionName }: TProps) => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteArrayDoc(actionName, items, id, dispatch);
+            firebaseDeleteDoc(actionName, items, id, dispatch);
         }
         setOpen(false);
     };

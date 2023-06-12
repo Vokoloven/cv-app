@@ -5,10 +5,10 @@ import { Spinner } from 'components/Spinner/Spinner';
 import { useSelector } from 'react-redux';
 import { selectData } from 'redux/getDataSlice';
 
-const bannerHeadres: { name: string }[] = [
-    { name: 'Summary' },
-    { name: 'Experience' },
-    { name: 'Education' },
+const bannerHeadres: { actionName: string }[] = [
+    { actionName: 'Summary' },
+    { actionName: 'Experience' },
+    { actionName: 'Education' },
 ];
 
 export const Banner = () => {
@@ -16,8 +16,8 @@ export const Banner = () => {
 
     return (
         <Box>
-            {bannerHeadres.map(({ name }) => (
-                <Box key={name}>
+            {bannerHeadres.map(({ actionName }) => (
+                <Box key={actionName}>
                     <Box
                         sx={(theme) => ({
                             display: 'flex',
@@ -49,12 +49,13 @@ export const Banner = () => {
                                       }),
                             })}
                         >
-                            {name}
+                            {actionName}
                         </Typography>
                     </Box>
-
                     <Spinner loading={loading} />
-                    {loading === 'succeeded' && <BannerItems name={name} />}
+                    {loading === 'succeeded' && (
+                        <BannerItems actionName={actionName.toLowerCase()} />
+                    )}
                 </Box>
             ))}
         </Box>

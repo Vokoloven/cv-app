@@ -14,7 +14,7 @@ import { AppDispatch } from 'redux/store';
 import { selectData } from 'redux/getDataSlice';
 import { Spinner } from 'components/Spinner/Spinner';
 import { AlertDialogSlide } from 'components/Dialog';
-import { firebaseDeleteArrayDoc } from 'firebase/firestoreDatabase';
+import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
 
 export const Photo = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -30,7 +30,7 @@ export const Photo = () => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteArrayDoc('photo', null, path, dispatch);
+            firebaseDeleteDoc('photo', null, path, dispatch);
         }
 
         setOpen(false);
