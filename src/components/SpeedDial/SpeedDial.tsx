@@ -71,9 +71,9 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                                 display: 'none',
                             },
                         }),
-                        [theme.breakpoints.up('desktop')]: {
-                            right: 'calc(50% - 700px)',
-                        },
+                        // [theme.breakpoints.up('desktop')]: {
+                        //     right: 'calc(50% - 800px)',
+                        // },
                     })}
                 >
                     <SpeedDial
