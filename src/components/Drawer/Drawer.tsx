@@ -65,6 +65,7 @@ export function TemporaryDrawer() {
                 anchor={'right'}
                 open={state['right']}
                 onClose={toggleDrawer('right', false)}
+                disableRestoreFocus
             >
                 {list()}
             </Drawer>

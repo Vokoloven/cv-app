@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
 import { useRef } from 'react';
 import Box from '@mui/material/Box';
@@ -16,6 +16,7 @@ import { sxIcon } from './sxIcon';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { AlertDialogSlide } from 'components/Dialog';
 import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
+import { selectAuth } from 'redux/authSlice';
 
 type TProps = {
     actionName: string;
@@ -45,6 +46,8 @@ export const PaperItems = ({ actionName }: TProps) => {
     const linkedin = useRequiredDoc('linkedin')?.linkedin;
     const telegram = useRequiredDoc('telegram')?.telegram;
 
+    const { access } = useSelector(selectAuth);
+
     const dispatch = useDispatch();
 
     const handleOpen = (id?: string | null, name?: string | null) => {
@@ -53,7 +56,7 @@ export const PaperItems = ({ actionName }: TProps) => {
             setName(name);
         }
 
-        setOpen(true);
+        access === 0 && setOpen(true);
     };
 
     const handleClose = (value: 'Cancel' | 'Ok') => {

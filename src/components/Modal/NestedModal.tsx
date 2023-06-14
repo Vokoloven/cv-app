@@ -71,9 +71,9 @@ export const NestedModal = ({
             <Dialog
                 open={openModal}
                 onClose={closeModal}
-                disableRestoreFocus
                 aria-describedby="dialog add items"
                 scroll={'paper'}
+                disableRestoreFocus
             >
                 <DialogTitle>
                     Fill the "{actionName?.toUpperCase()}" Form
