@@ -6,7 +6,7 @@ import { BoxWrapper } from 'components/BoxWrapper';
 export const Summary = () => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <BoxWrapper side={'left'} page={'summary'}>
+            <BoxWrapper side={'left'}>
                 <Box sx={{ mt: 2 }}>
                     <Banner />
                 </Box>

@@ -13,14 +13,14 @@ export const Home = () => {
                 justifyContent: 'center',
             }}
         >
-            <BoxWrapper side={'left'} page={'home'}>
+            <BoxWrapper side={'left'}>
                 <Box sx={{ mt: 2 }}>
                     <Person side={'left'} />
                     <Photo />
                     <CustomizedAccordion />
                 </Box>
             </BoxWrapper>
-            <BoxWrapper side={'right'} page={'home'}>
+            <BoxWrapper side={'right'}>
                 <Box sx={{ mt: 2 }}>
                     <Person side={'right'} />
                     <Banner />

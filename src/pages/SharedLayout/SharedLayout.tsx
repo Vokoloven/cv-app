@@ -14,11 +14,11 @@ export const SharedLayout = () => {
                     justifyContent: 'center',
                 }}
             >
-                <BoxWrapper side={'left'} page={'sharedLayout'}>
+                <BoxWrapper side={'left'}>
                     <Aside />
                     <SpeedDialTooltipOpen side={'left'} />
                 </BoxWrapper>
-                <BoxWrapper side={'right'} page={'sharedLayout'}>
+                <BoxWrapper side={'right'}>
                     <ResponsiveAppBar side={'right'} />
                     <SpeedDialTooltipOpen side={'right'} />
                 </BoxWrapper>

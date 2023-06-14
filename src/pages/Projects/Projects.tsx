@@ -35,10 +35,10 @@ export const Projects = () => {
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <BoxWrapper side={'left'} page={'projects'}>
+            <BoxWrapper side={'left'}>
                 <Box sx={{ mt: 2 }}>{handleProjectItems()}</Box>
             </BoxWrapper>
-            <BoxWrapper side={'right'} page={'projects'}>
+            <BoxWrapper side={'right'}>
                 <Box sx={{ mt: 2 }}>
                     <ProjectsItems />
                 </Box>
