@@ -6,6 +6,7 @@ import { TInput } from 'components/Modal/NestedModal';
 import { multilineHanlder } from './multilineHandler';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import IconButton from '@mui/material/IconButton';
+import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 
 type TProps = {
     actionName: string | null;
@@ -39,7 +40,8 @@ export const Forms = ({ actionName, onChangeHandler, input }: TProps) => {
                     <Box sx={{ mt: 1 }}>
                         <IconButton
                             component={'label'}
-                            aria-label={'upload picture button'}
+                            aria-label={'upload picture'}
+                            sx={sxIconButtonColor()}
                         >
                             <input hidden type={'file'} accept={'image/*'} />
                             <AddPhotoAlternateIcon />

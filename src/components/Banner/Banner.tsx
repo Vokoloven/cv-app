@@ -39,7 +39,7 @@ export const Banner = () => {
                             variant={'h3'}
                             component={'h2'}
                             sx={(theme) => ({
-                                ml: 2,
+                                pl: 2,
                                 ...(theme.palette.mode === 'light'
                                     ? {
                                           color: 'primary.typography.text.primary',

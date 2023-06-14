@@ -29,7 +29,8 @@ export const actionsHandler = (
 
             case '/summary':
                 return actions.filter(
-                    (action: TActions) => action.name !== 'projects'
+                    (action: TActions) =>
+                        action.name !== 'projects' && action.name !== 'name'
                 );
                 break;
 

@@ -19,8 +19,8 @@ type TProps = {
 
 const sxItems = () => {
     return {
-        ml: 2,
-        mb: 2,
+        pl: 2,
+        pb: 2,
     };
 };
 

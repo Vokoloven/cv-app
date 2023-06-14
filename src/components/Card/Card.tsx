@@ -71,9 +71,9 @@ export const CustomCard = ({ item }: TProps) => {
                 >
                     <CardMedia
                         component="img"
-                        height="194"
                         image={item?.photo}
                         alt={item?.projectName}
+                        sx={{ height: '170px' }}
                     />
                 </Box>
             </CardActionArea>

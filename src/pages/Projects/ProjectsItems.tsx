@@ -18,11 +18,11 @@ export const ProjectsItems = () => {
     const items = useRequiredDoc('projects')?.projects;
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, px: 2, pb: 2 }}>
             <Grid
                 container
                 spacing={{ mobile: 1, tablet: 3 }}
-                columns={{ mobile: 3, tablet: 8, laptop: 12 }}
+                columns={{ mobile: 2.5, tablet: 8, laptop: 12 }}
                 sx={(theme) => ({
                     [theme.breakpoints.down('tablet')]: {
                         justifyContent: 'center',

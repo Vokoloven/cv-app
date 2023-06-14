@@ -38,7 +38,7 @@ export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
     };
 
     const appItems = (side: 'right' | 'left') => {
-        if (side === 'right') {
+        if (side === 'right' && width > 767) {
             return (
                 <>
                     <AppBarTabs />

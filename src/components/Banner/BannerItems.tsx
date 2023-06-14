@@ -16,7 +16,7 @@ type TProps = { actionName: string };
 
 const sxItems = () => {
     return {
-        ml: 2,
+        pl: 2,
         mb: 2,
     };
 };
@@ -70,7 +70,7 @@ export const BannerItems = ({ actionName }: TProps) => {
         if (actionName === 'summary') {
             return (
                 !!items && (
-                    <Box sx={sxItems()}>
+                    <Box sx={{ pr: 2, ...sxItems() }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant={'body1'}>{items}</Typography>
                             {isRenderDeleteButton(actionName, actionName)}
