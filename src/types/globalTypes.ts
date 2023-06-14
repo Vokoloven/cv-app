@@ -7,7 +7,7 @@ export type TChildren = {
 
 export type TAppBar = {
     side: 'left' | 'right';
-    page: 'sharedLayout' | 'home' | 'projects';
+    page: 'sharedLayout' | 'home' | 'projects' | 'summary';
 };
 
 export type TSpinner = {

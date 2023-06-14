@@ -134,7 +134,7 @@ export const PaperItems = ({ actionName }: TProps) => {
                     <Box
                         component={'ul'}
                         sx={{
-                            ml: 1,
+                            pl: 1,
                             py: 1,
                         }}
                     >

@@ -19,6 +19,10 @@ import { selectAuth } from 'redux/authSlice/selectAuth';
 import { NestedModal } from 'components/Modal/NestedModal';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { capitalize } from '@mui/material';
+import {
+    useWindowDimensions,
+    getWindowDimension,
+} from 'hooks/useWindowDimensions';
 
 type TActions = { icon: JSX.Element; name: string };
 
@@ -40,6 +44,8 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
     const handleClose = () => setOpen(false);
     const { uploadButton } = useSelector(selectTheming);
     const { access } = useSelector(selectAuth);
+
+    const { width } = useWindowDimensions(getWindowDimension);
 
     const onClickHandler = (actionName: string) => {
         handleClose();
@@ -64,16 +70,16 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                             [theme.breakpoints.up('tablet')]: {
                                 display: 'none',
                             },
-                            ...(pathname === '/' && { display: 'none' }),
+                            // ...(pathname === '/' && { display: 'none' }),
                         }),
                         ...(side === 'right' && {
                             [theme.breakpoints.down('tablet')]: {
                                 display: 'none',
                             },
                         }),
-                        [theme.breakpoints.up('desktop')]: {
-                            right: 'calc(50% - 700px)',
-                        },
+                        // [theme.breakpoints.up('desktop')]: {
+                        //     right: 'calc(50% - 800px)',
+                        // },
                     })}
                 >
                     <SpeedDial
@@ -86,7 +92,7 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                         direction={'down'}
                         hidden={uploadButton ? true : false}
                     >
-                        {actionsHandler(actions, pathname, side)?.map(
+                        {actionsHandler(actions, pathname, side, width)?.map(
                             (action) => (
                                 <SpeedDialAction
                                     key={action.name}

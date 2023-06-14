@@ -1,6 +1,7 @@
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+import { CustomCard } from 'components/Card';
 
 type TItem = {
     projectName: string;
@@ -9,45 +10,32 @@ type TItem = {
     description: string;
     id: string;
     repo: string;
+    photo: string;
+    path: string;
 };
 
 export const ProjectsItems = () => {
     const items = useRequiredDoc('projects')?.projects;
 
     return (
-        <Box>
-            {items?.length > 0 &&
-                items.map(
-                    ({
-                        tools,
-                        link,
-                        description,
-                        id,
-                        repo,
-                        projectName,
-                    }: TItem) => (
-                        <Box key={id}>
-                            <Box
-                                component={'a'}
-                                href={link}
-                                target={'_blank'}
-                                rel={'noreferrer noopener'}
-                                sx={{ mr: 1 }}
-                            >
-                                {projectName}
-                            </Box>
-                            <Box
-                                component={'a'}
-                                href={repo}
-                                target={'_blank'}
-                                rel={'noreferrer noopener'}
-                            >
-                                GitHub
-                            </Box>
-                            <Typography variant={'body1'}>({tools})</Typography>
-                        </Box>
-                    )
-                )}
+        <Box sx={{ flexGrow: 1, px: 2, pb: 2 }}>
+            <Grid
+                container
+                spacing={{ mobile: 1, tablet: 3 }}
+                columns={{ mobile: 2.5, tablet: 8, laptop: 12 }}
+                sx={(theme) => ({
+                    [theme.breakpoints.down('tablet')]: {
+                        justifyContent: 'center',
+                    },
+                })}
+            >
+                {items?.length > 0 &&
+                    items.map((item: TItem) => (
+                        <Grid mobile={2} tablet={4} laptop={4} key={item?.id}>
+                            <CustomCard item={item} />
+                        </Grid>
+                    ))}
+            </Grid>
         </Box>
     );
 };

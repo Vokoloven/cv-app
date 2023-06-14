@@ -19,14 +19,13 @@ type TProps = {
 
 const sxItems = () => {
     return {
-        ml: 2,
-        mb: 2,
+        pl: 2,
+        pb: 2,
     };
 };
 
 export const Person = ({ side }: TProps) => {
     const [open, setOpen] = useState<boolean>(false);
-
     const [name, setName] = useState<string | null>(null);
 
     const dispatch = useDispatch<AppDispatch>();
