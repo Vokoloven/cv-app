@@ -12,17 +12,11 @@ import { SharedLayout } from 'pages/SharedLayout';
 import Container from '@mui/material/Container';
 import { getFirestoreDatabase } from 'redux/service';
 import { AppDispatch } from 'redux/store';
-// import { selectData } from 'redux/getDataSlice';
 
 export const App = () => {
     const { colorMode } = useSelector(selectTheming);
     const dispatch = useDispatch<AppDispatch>();
     const isFirstRender = useRef(true);
-    // const { data } = useSelector(selectData);
-
-    // const test = data.find((item: any) => item?.Name);
-
-    // console.log(test?.Name);
 
     useEffect(() => {
         if (isFirstRender.current) {

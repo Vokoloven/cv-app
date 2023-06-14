@@ -21,8 +21,13 @@ export const ProjectsItems = () => {
         <Box sx={{ flexGrow: 1 }}>
             <Grid
                 container
-                spacing={{ mobile: 2, tablet: 3 }}
-                columns={{ mobile: 4, tablet: 8, laptop: 12 }}
+                spacing={{ mobile: 1, tablet: 3 }}
+                columns={{ mobile: 3, tablet: 8, laptop: 12 }}
+                sx={(theme) => ({
+                    [theme.breakpoints.down('tablet')]: {
+                        justifyContent: 'center',
+                    },
+                })}
             >
                 {items?.length > 0 &&
                     items.map((item: TItem) => (

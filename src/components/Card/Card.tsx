@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,6 +15,7 @@ import { CardActionArea } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { PositionedPopper } from 'components/Popper/Popper';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
+import { selectTheming } from 'redux/themingSlice';
 
 type TItem = {
     projectName: string;
@@ -47,6 +49,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export const CustomCard = ({ item }: TProps) => {
     const [expanded, setExpanded] = React.useState(false);
+    const { uploadButton } = useSelector(selectTheming);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -55,7 +58,6 @@ export const CustomCard = ({ item }: TProps) => {
     return (
         <Card elevation={4} sx={{ maxWidth: 345 }}>
             <CardHeader
-                // action={<PositionedPopper item={item} />}
                 title={item?.projectName}
                 subheader={item?.tools}
                 sx={{ flexWrap: 'wrap' }}
@@ -77,7 +79,9 @@ export const CustomCard = ({ item }: TProps) => {
             </CardActionArea>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {item?.description}
+                    {item?.description?.length > 100
+                        ? `${item?.description.slice(0, 100)}...`
+                        : item?.description}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -91,7 +95,7 @@ export const CustomCard = ({ item }: TProps) => {
                         <GitHubIcon />
                     </IconButton>
                 </Box>
-                <PositionedPopper item={item} />
+                {!uploadButton && <PositionedPopper item={item} />}
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}

@@ -23,7 +23,7 @@ import {
 } from 'theme/sxIconButtonColor';
 import { NavLink } from 'react-router-dom';
 
-const pages: Readonly<string[]> = ['Home', 'Projects'];
+const pages: Readonly<string[]> = ['Home', 'Projects', 'Summary'];
 
 export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
