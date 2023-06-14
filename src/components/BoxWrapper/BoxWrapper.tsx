@@ -3,7 +3,7 @@ import { TAppBar, TChildren } from 'types/globalTypes';
 
 type TProps = TAppBar & TChildren;
 
-export const BoxWrapper = ({ children, side, page }: TProps) => {
+export const BoxWrapper = ({ children, side }: TProps) => {
     return (
         <Box
             sx={(theme) => ({
