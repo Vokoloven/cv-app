@@ -11,6 +11,7 @@ import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { AlertDialogSlide } from 'components/Dialog';
 import { AppDispatch } from 'redux/store';
 import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
+import { selectAuth } from 'redux/authSlice';
 
 type TProps = { actionName: string };
 
@@ -32,6 +33,7 @@ export const BannerItems = ({ actionName }: TProps) => {
         actionName.toLowerCase()
     ];
     const { uploadButton } = useSelector(selectTheming);
+    const { access } = useSelector(selectAuth);
 
     const handleOpen = (id?: string | null, name?: string | null) => {
         if (id && name) {
@@ -52,7 +54,7 @@ export const BannerItems = ({ actionName }: TProps) => {
         id: string | null,
         actionName: string | null
     ) => {
-        if (!uploadButton) {
+        if (!uploadButton && access === 0) {
             return (
                 <IconButton
                     sx={sxIconButtonColor()}

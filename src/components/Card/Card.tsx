@@ -16,6 +16,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { PositionedPopper } from 'components/Popper/Popper';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { selectTheming } from 'redux/themingSlice';
+import { selectAuth } from 'redux/authSlice';
 
 type TItem = {
     projectName: string;
@@ -50,6 +51,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export const CustomCard = ({ item }: TProps) => {
     const [expanded, setExpanded] = React.useState(false);
     const { uploadButton } = useSelector(selectTheming);
+    const { access } = useSelector(selectAuth);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -95,7 +97,9 @@ export const CustomCard = ({ item }: TProps) => {
                         <GitHubIcon />
                     </IconButton>
                 </Box>
-                {!uploadButton && <PositionedPopper item={item} />}
+                {!uploadButton && access === 0 && (
+                    <PositionedPopper item={item} />
+                )}
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}

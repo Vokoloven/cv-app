@@ -12,6 +12,7 @@ import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { selectTheming } from 'redux/themingSlice';
 import { AlertDialogSlide } from 'components/Dialog';
 import { AppDispatch } from 'redux/store';
+import { selectAuth } from 'redux/authSlice';
 
 type TProps = {
     side: 'right' | 'left';
@@ -32,6 +33,7 @@ export const Person = ({ side }: TProps) => {
 
     const userName = useRequiredDoc('name');
     const { uploadButton } = useSelector(selectTheming);
+    const { access } = useSelector(selectAuth);
 
     const handleOpen = (name?: string | null) => {
         if (name) {
@@ -51,7 +53,7 @@ export const Person = ({ side }: TProps) => {
     const { loading } = useSelector(selectData);
 
     const isRenderDeleteButton = (actionName: string | null) => {
-        if (!uploadButton) {
+        if (!uploadButton && access === 0) {
             return (
                 <IconButton
                     sx={sxIconButtonColor()}
