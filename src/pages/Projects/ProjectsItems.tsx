@@ -29,21 +29,21 @@ export const ProjectsItems = () => {
                 spacing={{ mobile: 1, tablet: 3 }}
                 columns={{ mobile: 2.5, tablet: 8, laptop: 12 }}
                 sx={(theme) => ({
+                    width: '100%',
                     [theme.breakpoints.down('tablet')]: {
                         justifyContent: 'center',
                     },
                 })}
             >
-                {loading === 'pending' &&
-                    ['1', '2', '3'].map((item) => (
-                        <Grid mobile={2} tablet={4} laptop={4} key={item}>
-                            <CustomSkeleton
-                                loading={loading}
-                                spacing={1}
-                                skeletonProps={skeleton}
-                            />
-                        </Grid>
-                    ))}
+                {['1', '2', '3'].map((item) => (
+                    <Grid mobile={2} tablet={4} laptop={4} key={item}>
+                        <CustomSkeleton
+                            loading={loading}
+                            spacing={1}
+                            skeletonProps={skeleton}
+                        />
+                    </Grid>
+                ))}
                 {items?.length > 0 &&
                     items.map((item: TItem) => (
                         <Grid mobile={2} tablet={4} laptop={4} key={item?.id}>

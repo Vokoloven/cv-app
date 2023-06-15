@@ -9,16 +9,7 @@ export const CustomSkeleton = ({
 }: TSkeleton) => {
     if (loading === 'pending') {
         return (
-            <Stack
-                spacing={spacing}
-                sx={(theme) => ({
-                    my: 2,
-                    [theme.breakpoints.down('tablet')]: {
-                        display: 'flex',
-                        alignItems: 'center',
-                    },
-                })}
-            >
+            <Stack spacing={spacing} sx={{ my: 2 }}>
                 {skeletonProps.map(({ variant, height, width, id }) => (
                     <Skeleton
                         key={id}
