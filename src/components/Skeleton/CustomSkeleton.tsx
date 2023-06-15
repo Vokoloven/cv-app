@@ -9,7 +9,7 @@ export const CustomSkeleton = ({
 }: TSkeleton) => {
     if (loading === 'pending') {
         return (
-            <Stack spacing={spacing} sx={{ my: 2 }}>
+            <Stack spacing={spacing} sx={{ p: 2 }}>
                 {skeletonProps.map(({ variant, height, width, id }) => (
                     <Skeleton
                         key={id}
