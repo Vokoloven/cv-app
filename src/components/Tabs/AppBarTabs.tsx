@@ -5,16 +5,23 @@ import Tab from '@mui/material/Tab';
 import { useNavigate } from 'react-router-dom';
 import { useCustomLocation } from 'hooks/useCustomLocation';
 
+const pages: Readonly<string[]> = ['Home', 'Projects'];
+
 export const AppBarTabs = () => {
     const pathname = useCustomLocation();
+    const isValidPage = pages.some(
+        (page) => page === pathname.charAt(1).toUpperCase() + pathname.slice(2)
+    );
+
     const [value, setValue] = useState<string | (() => void)>(() => {
         if (pathname === '/') {
             return 'Home';
         } else {
-            return pathname.charAt(1).toUpperCase() + pathname.slice(2);
+            return isValidPage
+                ? pathname.charAt(1).toUpperCase() + pathname.slice(2)
+                : 'Home';
         }
     });
-    const pages: Readonly<string[]> = ['Home', 'Projects'];
     const navigate = useNavigate();
 
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -25,9 +32,11 @@ export const AppBarTabs = () => {
         if (pathname === '/') {
             setValue('Home');
         } else {
-            setValue(pathname.charAt(1).toUpperCase() + pathname.slice(2));
+            isValidPage
+                ? setValue(pathname.charAt(1).toUpperCase() + pathname.slice(2))
+                : setValue('Home');
         }
-    }, [pathname]);
+    }, [isValidPage, pathname]);
 
     return (
         <Box sx={{ width: '100%' }}>

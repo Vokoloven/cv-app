@@ -8,8 +8,9 @@ import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
 import { NestedModal } from 'components/Modal/NestedModal';
 import { PaperItems } from '.';
-import { Spinner } from 'components/Spinner/Spinner';
 import { selectData } from 'redux/getDataSlice';
+import { CustomSkeleton } from 'components/Skeleton';
+import { contactsSkeleton, otherSkeleton } from './skeletonProps';
 
 const childrenHandler = (
     actionName: TActionName,
@@ -77,7 +78,19 @@ export function CustomizedAccordion() {
                             onClickHandler
                         )}
                     </CustomizedAccordionItem>
-                    <Spinner loading={loading} />
+                    {actionName === 'contacts' ? (
+                        <CustomSkeleton
+                            loading={loading}
+                            spacing={1}
+                            skeletonProps={contactsSkeleton}
+                        />
+                    ) : (
+                        <CustomSkeleton
+                            loading={loading}
+                            spacing={1}
+                            skeletonProps={otherSkeleton}
+                        />
+                    )}
                     {loading === 'succeeded' && (
                         <PaperItems actionName={actionName} />
                     )}

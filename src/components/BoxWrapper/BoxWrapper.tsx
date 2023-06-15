@@ -14,13 +14,13 @@ export const BoxWrapper = ({ children, side }: TProps) => {
                 ...(side === 'left' && {
                     [theme.breakpoints.up('tablet')]: {
                         maxWidth: [theme.breakpoints.values.mobile],
+                        mr: 3,
                     },
                     [theme.breakpoints.up('mobile')]: {
                         maxWidth: [theme.breakpoints.values.mobileL],
                     },
                 }),
                 ...(side === 'right' && {
-                    ml: 3,
                     [theme.breakpoints.down('tablet')]: {
                         display: 'none',
                     },
