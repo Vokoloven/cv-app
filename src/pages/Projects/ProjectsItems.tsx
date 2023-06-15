@@ -35,15 +35,16 @@ export const ProjectsItems = () => {
                     },
                 })}
             >
-                {['1', '2', '3'].map((item) => (
-                    <Grid mobile={2} tablet={4} laptop={4} key={item}>
-                        <CustomSkeleton
-                            loading={loading}
-                            spacing={1}
-                            skeletonProps={skeleton}
-                        />
-                    </Grid>
-                ))}
+                {loading === 'pending' &&
+                    ['1', '2', '3'].map((item) => (
+                        <Grid mobile={2} tablet={4} laptop={4} key={item}>
+                            <CustomSkeleton
+                                loading={loading}
+                                spacing={1}
+                                skeletonProps={skeleton}
+                            />
+                        </Grid>
+                    ))}
                 {items?.length > 0 &&
                     items.map((item: TItem) => (
                         <Grid mobile={2} tablet={4} laptop={4} key={item?.id}>
