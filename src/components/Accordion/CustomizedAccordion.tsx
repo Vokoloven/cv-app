@@ -8,8 +8,8 @@ import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
 import { NestedModal } from 'components/Modal/NestedModal';
 import { PaperItems } from '.';
-import { Spinner } from 'components/Spinner/Spinner';
 import { selectData } from 'redux/getDataSlice';
+import { CustomSkeleton } from 'components/Skeleton';
 
 const childrenHandler = (
     actionName: TActionName,
@@ -77,7 +77,69 @@ export function CustomizedAccordion() {
                             onClickHandler
                         )}
                     </CustomizedAccordionItem>
-                    <Spinner loading={loading} />
+                    {actionName === 'contacts' ? (
+                        <CustomSkeleton
+                            loading={loading}
+                            spacing={1}
+                            skeletonProps={[
+                                {
+                                    id: '1',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '2',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '3',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '4',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '5',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                            ]}
+                        />
+                    ) : (
+                        <CustomSkeleton
+                            loading={loading}
+                            spacing={1}
+                            skeletonProps={[
+                                {
+                                    id: '1',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '2',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                                {
+                                    id: '3',
+                                    variant: 'text',
+                                    width: 300,
+                                    height: 20,
+                                },
+                            ]}
+                        />
+                    )}
                     {loading === 'succeeded' && (
                         <PaperItems actionName={actionName} />
                     )}

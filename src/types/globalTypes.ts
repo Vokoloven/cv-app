@@ -13,6 +13,24 @@ export type TSpinner = {
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 };
 
+export type TSkeleton = {
+    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    spacing: number;
+    skeletonProps: {
+        id?: string;
+        variant?: 'text' | 'rectangular' | 'rounded' | 'circular';
+        width?: number;
+        height?: number;
+    }[];
+};
+
+export type TSkeletonProps = {
+    id?: string;
+    variant?: 'text' | 'rectangular' | 'rounded' | 'circular';
+    width?: number;
+    height?: number;
+}[];
+
 export type TSetStateBoolean = Dispatch<SetStateAction<boolean>>;
 
 export type TSetStateString = Dispatch<SetStateAction<string | null>>;

@@ -6,13 +6,13 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
-import { Spinner } from 'components/Spinner/Spinner';
 import { selectData } from 'redux/getDataSlice';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { selectTheming } from 'redux/themingSlice';
 import { AlertDialogSlide } from 'components/Dialog';
 import { AppDispatch } from 'redux/store';
 import { selectAuth } from 'redux/authSlice';
+import { CustomSkeleton } from 'components/Skeleton';
 
 type TProps = {
     side: 'right' | 'left';
@@ -77,7 +77,15 @@ export const Person = ({ side }: TProps) => {
                 }),
             })}
         >
-            <Spinner loading={loading} />
+            <CustomSkeleton
+                loading={loading}
+                spacing={1}
+                skeletonProps={[
+                    { id: '1', variant: 'text', width: 300, height: 20 },
+                    { id: '2', variant: 'text', width: 300, height: 20 },
+                    { id: '3', variant: 'text', width: 300, height: 20 },
+                ]}
+            />
             {loading === 'succeeded' && (
                 <Box sx={sxItems()}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>

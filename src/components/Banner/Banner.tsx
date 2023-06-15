@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { BannerItems } from '.';
-import { Spinner } from 'components/Spinner/Spinner';
 import { useSelector } from 'react-redux';
 import { selectData } from 'redux/getDataSlice';
+import { CustomSkeleton } from 'components/Skeleton';
+import { skeleton } from './skeletonProps';
 
 const bannerHeadres: { actionName: string }[] = [
     { actionName: 'Summary' },
@@ -52,7 +53,11 @@ export const Banner = () => {
                             {actionName}
                         </Typography>
                     </Box>
-                    <Spinner loading={loading} />
+                    <CustomSkeleton
+                        loading={loading}
+                        spacing={1}
+                        skeletonProps={skeleton}
+                    />
                     {loading === 'succeeded' && (
                         <BannerItems actionName={actionName.toLowerCase()} />
                     )}
