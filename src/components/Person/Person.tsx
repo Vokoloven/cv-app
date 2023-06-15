@@ -13,6 +13,7 @@ import { AlertDialogSlide } from 'components/Dialog';
 import { AppDispatch } from 'redux/store';
 import { selectAuth } from 'redux/authSlice';
 import { CustomSkeleton } from 'components/Skeleton';
+import { skeleton } from './skeletonProps';
 
 type TProps = {
     side: 'right' | 'left';
@@ -21,7 +22,8 @@ type TProps = {
 const sxItems = () => {
     return {
         pl: 2,
-        pb: 2,
+        pr: 2,
+        mb: 2,
     };
 };
 
@@ -80,11 +82,7 @@ export const Person = ({ side }: TProps) => {
             <CustomSkeleton
                 loading={loading}
                 spacing={1}
-                skeletonProps={[
-                    { id: '1', variant: 'text', width: 300, height: 20 },
-                    { id: '2', variant: 'text', width: 300, height: 20 },
-                    { id: '3', variant: 'text', width: 300, height: 20 },
-                ]}
+                skeletonProps={skeleton}
             />
             {loading === 'succeeded' && (
                 <Box sx={sxItems()}>

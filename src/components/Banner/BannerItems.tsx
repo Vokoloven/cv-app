@@ -18,6 +18,7 @@ type TProps = { actionName: string };
 const sxItems = () => {
     return {
         pl: 2,
+        pr: 2,
         mb: 2,
     };
 };
@@ -72,7 +73,7 @@ export const BannerItems = ({ actionName }: TProps) => {
         if (actionName === 'summary') {
             return (
                 !!items && (
-                    <Box sx={{ pr: 2, ...sxItems() }}>
+                    <Box sx={{ ...sxItems() }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Typography variant={'body1'}>{items}</Typography>
                             {isRenderDeleteButton(actionName, actionName)}
@@ -106,7 +107,11 @@ export const BannerItems = ({ actionName }: TProps) => {
                     ({ id, degree, institution, period }: DocumentData) => (
                         <Box key={id} sx={sxItems()}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant={'h6'} component={'h3'}>
+                                <Typography
+                                    variant={'h6'}
+                                    component={'h3'}
+                                    sx={{ mr: 1 }}
+                                >
                                     {institution}
                                 </Typography>
                                 {isRenderDeleteButton(id, institution)}

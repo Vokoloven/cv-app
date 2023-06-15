@@ -12,7 +12,7 @@ export const CustomSkeleton = ({
             <Stack
                 spacing={spacing}
                 sx={(theme) => ({
-                    py: 2,
+                    my: 2,
                     [theme.breakpoints.down('tablet')]: {
                         display: 'flex',
                         alignItems: 'center',

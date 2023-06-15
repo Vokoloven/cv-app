@@ -1,4 +1,8 @@
 export const styles = {
+    body: {
+        overflowY: 'overlay',
+    },
+
     h1: {
         margin: 0,
     },

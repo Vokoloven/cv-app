@@ -13,11 +13,16 @@ import Container from '@mui/material/Container';
 import { getFirestoreDatabase } from 'redux/service';
 import { AppDispatch } from 'redux/store';
 import { Summary } from 'pages/Summary';
+import {
+    useWindowDimensions,
+    getWindowDimension,
+} from 'hooks/useWindowDimensions';
 
 export const App = () => {
     const { colorMode } = useSelector(selectTheming);
     const dispatch = useDispatch<AppDispatch>();
     const isFirstRender = useRef(true);
+    const { width } = useWindowDimensions(getWindowDimension);
 
     useEffect(() => {
         if (isFirstRender.current) {
@@ -54,7 +59,9 @@ export const App = () => {
                         <Route path={'/'} element={<SharedLayout />}>
                             <Route index element={<Home />} />
                             <Route path={'projects'} element={<Projects />} />
-                            <Route path={'summary'} element={<Summary />} />
+                            {width < 768 && (
+                                <Route path={'summary'} element={<Summary />} />
+                            )}
                             <Route path={'*'} element={<Home />} />
                         </Route>
                     </Routes>

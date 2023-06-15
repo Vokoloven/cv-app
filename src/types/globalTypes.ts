@@ -19,16 +19,16 @@ export type TSkeleton = {
     skeletonProps: {
         id?: string;
         variant?: 'text' | 'rectangular' | 'rounded' | 'circular';
-        width?: number;
-        height?: number;
+        width?: number | string;
+        height?: number | string;
     }[];
 };
 
 export type TSkeletonProps = {
     id?: string;
     variant?: 'text' | 'rectangular' | 'rounded' | 'circular';
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
 }[];
 
 export type TSetStateBoolean = Dispatch<SetStateAction<boolean>>;

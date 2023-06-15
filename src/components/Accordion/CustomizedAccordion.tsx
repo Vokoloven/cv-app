@@ -10,6 +10,7 @@ import { NestedModal } from 'components/Modal/NestedModal';
 import { PaperItems } from '.';
 import { selectData } from 'redux/getDataSlice';
 import { CustomSkeleton } from 'components/Skeleton';
+import { contactsSkeleton, otherSkeleton } from './skeletonProps';
 
 const childrenHandler = (
     actionName: TActionName,
@@ -81,63 +82,13 @@ export function CustomizedAccordion() {
                         <CustomSkeleton
                             loading={loading}
                             spacing={1}
-                            skeletonProps={[
-                                {
-                                    id: '1',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '2',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '3',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '4',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '5',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                            ]}
+                            skeletonProps={contactsSkeleton}
                         />
                     ) : (
                         <CustomSkeleton
                             loading={loading}
                             spacing={1}
-                            skeletonProps={[
-                                {
-                                    id: '1',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '2',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                                {
-                                    id: '3',
-                                    variant: 'text',
-                                    width: 300,
-                                    height: 20,
-                                },
-                            ]}
+                            skeletonProps={otherSkeleton}
                         />
                     )}
                     {loading === 'succeeded' && (

@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import { Banner } from 'components/Banner';
-
 import { BoxWrapper } from 'components/BoxWrapper';
 
 export const Summary = () => {

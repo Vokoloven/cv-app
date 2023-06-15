@@ -137,8 +137,7 @@ export const PaperItems = ({ actionName }: TProps) => {
                     <Box
                         component={'ul'}
                         sx={{
-                            pl: 1,
-                            py: 1,
+                            padding: 1,
                         }}
                     >
                         {contacts.map(
@@ -176,13 +175,17 @@ export const PaperItems = ({ actionName }: TProps) => {
         } else {
             return (
                 items?.length > 0 && (
-                    <Box component={'ul'} sx={{ ml: 1, py: 1 }}>
+                    <Box
+                        component={'ul'}
+                        sx={{
+                            padding: 1,
+                        }}
+                    >
                         {items.map((item: TItem) => (
                             <Box
                                 component={'li'}
                                 key={item?.id}
                                 sx={{
-                                    ml: 1,
                                     display: 'flex',
                                 }}
                             >
@@ -207,7 +210,7 @@ export const PaperItems = ({ actionName }: TProps) => {
 
     return (
         <>
-            <Paper elevation={4} sx={{ mt: 1, mb: 2 }}>
+            <Paper elevation={4} sx={{ mt: 1, mb: 3 }}>
                 {renderedItemsByValue(actionName)}
             </Paper>
             <AlertDialogSlide
