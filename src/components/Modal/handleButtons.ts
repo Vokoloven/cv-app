@@ -1,8 +1,9 @@
 export const handleButton = (
     button: Readonly<'Cancel' | 'Ok'>,
-    activeButton: boolean
+    activeButton: boolean,
+    actionName: string | null
 ): boolean | undefined => {
-    if (button === 'Ok') {
+    if (actionName === 'projects' && button === 'Ok') {
         return activeButton;
     }
 };

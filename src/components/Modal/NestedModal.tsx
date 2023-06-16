@@ -129,7 +129,11 @@ export const NestedModal = ({
                             ariaLabel={'Close Button'}
                             iconName={button}
                             closeModal={closeModal}
-                            disabled={handleButton(button, activeButton)}
+                            disabled={handleButton(
+                                button,
+                                activeButton,
+                                actionName
+                            )}
                         >
                             {button}
                         </ModalButton>
