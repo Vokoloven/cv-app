@@ -23,7 +23,14 @@ export const ProjectsItems = () => {
     const { loading } = useSelector(selectData);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box
+            sx={(theme) => ({
+                flexGrow: 1,
+                [theme.breakpoints.down('tablet')]: {
+                    pb: 2,
+                },
+            })}
+        >
             <Grid
                 container
                 spacing={{ mobile: 1, tablet: 3 }}

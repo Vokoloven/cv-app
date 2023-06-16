@@ -1,7 +1,12 @@
 import { Theme } from '@mui/material/styles';
 
-export const sxIconButtonColor = () => {
+type TIconButton = {
+    [x: string]: string | number | { [x: string]: string | number };
+};
+
+export const sxIconButtonColor = (props?: TIconButton) => {
     return (theme: Theme) => ({
+        ...props,
         ...(theme.palette.mode === 'light'
             ? {
                   color: 'primary.button.complementary',

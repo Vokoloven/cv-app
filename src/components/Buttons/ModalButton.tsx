@@ -9,6 +9,7 @@ type TProps = {
     ariaLabel: string;
     iconName: TName;
     closeModal: (value: 'Cancel' | 'Ok') => void;
+    disabled?: boolean;
 };
 
 type TCombineProps = TChildren & TProps;
@@ -18,6 +19,7 @@ export const ModalButton = ({
     ariaLabel,
     iconName,
     closeModal,
+    disabled,
 }: TCombineProps) => {
     const iconsHandler = (iconName: TName) => {
         switch (iconName) {
@@ -59,6 +61,7 @@ export const ModalButton = ({
             })}
             endIcon={iconsHandler(iconName)}
             variant="outlined"
+            disabled={disabled}
         >
             {children}
         </Button>
