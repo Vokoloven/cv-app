@@ -10,7 +10,14 @@ import { ModalButton } from 'components/Buttons';
 import { firebaseSetDoc } from 'firebase/';
 import { TSetStateBoolean } from 'types/globalTypes';
 import { AppDispatch } from 'redux/store';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject,
+} from 'firebase/storage';
+import { handleButton } from './handleButtons';
 
 export type TInput<T> = {
     [x: string]: T;
@@ -24,12 +31,21 @@ type TProps = {
 
 const buttons: Readonly<'Cancel' | 'Ok'>[] = ['Cancel', 'Ok'];
 
+const storage = getStorage();
+
 export const NestedModal = ({
     openModal,
     setOpenModal,
     actionName,
 }: TProps) => {
     const [input, setInput] = useState<TInput<string>>({});
+    const [temporaryImagePath, setTemporaryImagePath] = useState<string | null>(
+        null
+    );
+    const [activeButton, setActiveButton] = useState<boolean>(true);
+    const [loadingImageProgress, setLoadingImageProgress] =
+        useState<boolean>(false);
+
     const dispatch = useDispatch<AppDispatch>();
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,31 +55,42 @@ export const NestedModal = ({
         setInput((prevState: TInput<string>) => ({ ...prevState, ...value }));
 
         const file = e.target?.files?.[0];
-        const storage = getStorage();
+
         const storageRef = ref(storage, `images/${file?.name}`);
 
         if (file) {
+            setLoadingImageProgress(true);
             uploadBytes(storageRef, file).then((snapshot) => {
                 snapshot &&
                     getDownloadURL(ref(storage, `images/${file?.name}`)).then(
                         (url) => {
+                            setTemporaryImagePath(`images/${file?.name}`);
+                            setActiveButton(false);
                             setInput((prevState: TInput<string>) => ({
                                 ...prevState,
                                 photo: url,
                                 path: `images/${file?.name}`,
                             }));
+                            setLoadingImageProgress(false);
                         }
                     );
             });
         }
     };
 
-    const closeModal = (value: 'Cancel' | 'Ok') => {
-        setOpenModal(false);
+    const closeModal = async (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
             firebaseSetDoc(actionName, input, dispatch);
+        } else {
+            const imageRef = ref(storage, `${temporaryImagePath}`);
+            temporaryImagePath && (await deleteObject(imageRef));
         }
         setInput({});
+        setTimeout(() => {
+            setActiveButton(true);
+        }, 0);
+        setTemporaryImagePath(null);
+        setOpenModal(false);
     };
 
     return (
@@ -83,6 +110,8 @@ export const NestedModal = ({
                         actionName={actionName}
                         onChangeHandler={onChangeHandler}
                         input={input}
+                        activeButton={activeButton}
+                        loadingImageProgress={loadingImageProgress}
                     />
                 </DialogContent>
                 <DialogActions
@@ -100,6 +129,7 @@ export const NestedModal = ({
                             ariaLabel={'Close Button'}
                             iconName={button}
                             closeModal={closeModal}
+                            disabled={handleButton(button, activeButton)}
                         >
                             {button}
                         </ModalButton>
