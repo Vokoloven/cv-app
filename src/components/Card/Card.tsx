@@ -87,16 +87,21 @@ export const CustomCard = ({ item }: TProps) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <Box
-                    component={'a'}
-                    href={item?.repo}
-                    target={'_blank'}
-                    rel={'noreferrer noopener'}
-                >
-                    <IconButton aria-label="github" sx={sxIconButtonColor()}>
-                        <GitHubIcon />
-                    </IconButton>
-                </Box>
+                {item?.repo && (
+                    <Box
+                        component={'a'}
+                        href={item?.repo}
+                        target={'_blank'}
+                        rel={'noreferrer noopener'}
+                    >
+                        <IconButton
+                            aria-label="github"
+                            sx={sxIconButtonColor()}
+                        >
+                            <GitHubIcon />
+                        </IconButton>
+                    </Box>
+                )}
                 {!uploadButton && access === 0 && (
                     <PositionedPopper item={item} />
                 )}

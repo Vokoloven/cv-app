@@ -17,17 +17,17 @@ import {
     getWindowDimension,
     useWindowDimensions,
 } from 'hooks/useWindowDimensions';
-import {
-    sxIconButtonColorSecondary,
-    sxIconButtonColor,
-} from 'theme/sxIconButtonColor';
+import { sxIconButtonColorSecondary } from 'theme/sxIconButtonColor';
 import { NavLink } from 'react-router-dom';
+import { sxNavLink } from 'theme/sxNavLink';
+import { useCustomLocation } from 'hooks/useCustomLocation';
 
 const pages: Readonly<string[]> = ['Home', 'Summary', 'Projects'];
 
 export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const { width } = useWindowDimensions(getWindowDimension);
+    const pathname = useCustomLocation();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -116,7 +116,7 @@ export function ResponsiveAppBar({ side }: Pick<TAppBar, 'side'>) {
                                     >
                                         <MenuItem
                                             onClick={handleCloseNavMenu}
-                                            sx={sxIconButtonColor()}
+                                            sx={sxNavLink(pathname, page)}
                                         >
                                             <Typography
                                                 textAlign="center"
