@@ -18,10 +18,10 @@ import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { selectTheming } from 'redux/themingSlice';
 import { selectAuth } from 'redux/authSlice';
 
-type TItem = {
+export type TItem = {
     projectName: string;
     tools: string;
-    link: string;
+    livePage: string;
     description: string;
     id: string;
     repo: string;
@@ -67,7 +67,7 @@ export const CustomCard = ({ item }: TProps) => {
             <CardActionArea sx={{ color: 'primary.background.primary' }}>
                 <Box
                     component={'a'}
-                    href={item?.link}
+                    href={item?.livePage}
                     target={'_blank'}
                     rel={'noreferrer noopener'}
                 >

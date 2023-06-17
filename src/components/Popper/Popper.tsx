@@ -11,17 +11,7 @@ import { AlertDialogSlide } from 'components/Dialog';
 import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
-
-type TItem = {
-    projectName: string;
-    tools: string;
-    link: string;
-    description: string;
-    id: string;
-    repo: string;
-    photo: string;
-    path: string;
-};
+import { TItem } from 'components/Card/Card';
 
 type TProps = {
     item: TItem;

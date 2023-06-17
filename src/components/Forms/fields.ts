@@ -13,7 +13,7 @@ const summaryFields: TFields = [{ id: 'summary', label: 'Summary' }];
 const projectsFields: TFields = [
     { id: 'projectName', label: 'Project Name' },
     { id: 'repo', label: 'Repo' },
-    { id: 'link', label: 'Link' },
+    { id: 'livePage', label: 'Live Page' },
     { id: 'tools', label: 'Tools' },
     { id: 'description', label: 'Description' },
 ];
