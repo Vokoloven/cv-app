@@ -7,10 +7,10 @@ import { CustomCard } from 'components/Card';
 import { CustomSkeleton } from 'components/Skeleton';
 import { skeleton } from './skeletonProps';
 
-type TItem = {
+export type TItem = {
     projectName: string;
     tools: string;
-    link: string;
+    livePage: string;
     description: string;
     id: string;
     repo: string;

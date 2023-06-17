@@ -17,17 +17,7 @@ import { PositionedPopper } from 'components/Popper/Popper';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
 import { selectTheming } from 'redux/themingSlice';
 import { selectAuth } from 'redux/authSlice';
-
-export type TItem = {
-    projectName: string;
-    tools: string;
-    livePage: string;
-    description: string;
-    id: string;
-    repo: string;
-    photo: string;
-    path: string;
-};
+import { TItem } from 'pages/Projects/ProjectsItems';
 
 type TProps = {
     item: TItem;
