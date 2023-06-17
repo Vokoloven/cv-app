@@ -11,7 +11,7 @@ import { AlertDialogSlide } from 'components/Dialog';
 import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
 import { useRequiredDoc } from 'hooks/useRequiredDoc';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
-import { TItem } from 'components/Card/Card';
+import { TItem } from 'pages/Projects/ProjectsItems';
 
 type TProps = {
     item: TItem;
