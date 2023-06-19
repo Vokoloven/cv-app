@@ -23,6 +23,13 @@ const experienceFields: TFields = [
     { id: 'period', label: 'Period' },
 ];
 
+const subExperienceFields: TFields = [
+    {
+        id: 'subExperience',
+        label: 'Description',
+    },
+];
+
 const educationFields: TFields = [
     { id: 'institution', label: 'Institution' },
     { id: 'period', label: 'Period' },
@@ -52,6 +59,7 @@ export const dataFields: { name: string; fields: TFields }[] = [
     { name: 'summary', fields: summaryFields },
     { name: 'projects', fields: projectsFields },
     { name: 'experience', fields: experienceFields },
+    { name: 'subExperience', fields: subExperienceFields },
     { name: 'education', fields: educationFields },
     { name: 'phone', fields: phoneFields },
     { name: 'email', fields: emailFields },

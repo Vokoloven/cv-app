@@ -18,6 +18,7 @@ import {
     deleteObject,
 } from 'firebase/storage';
 import { handleButton } from './handleButtons';
+import { useRequiredDoc } from 'hooks/useRequiredDoc';
 
 export type TInput<T> = {
     [x: string]: T;
@@ -27,16 +28,19 @@ type TProps = {
     openModal: boolean;
     setOpenModal: TSetStateBoolean;
     actionName: string | null;
+    subId?: string | null;
+    name?: string | null;
 };
 
 const buttons: Readonly<'Cancel' | 'Ok'>[] = ['Cancel', 'Ok'];
 
 const storage = getStorage();
 
-export const NestedModal = ({
+export const Modal = ({
     openModal,
     setOpenModal,
     actionName,
+    subId,
 }: TProps) => {
     const [input, setInput] = useState<TInput<string>>({});
     const [temporaryImagePath, setTemporaryImagePath] = useState<string | null>(
@@ -47,6 +51,8 @@ export const NestedModal = ({
         useState<boolean>(false);
 
     const dispatch = useDispatch<AppDispatch>();
+
+    const experience = useRequiredDoc('experience')?.experience;
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = {
@@ -80,7 +86,7 @@ export const NestedModal = ({
 
     const closeModal = async (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseSetDoc(actionName, input, dispatch);
+            firebaseSetDoc(actionName, input, dispatch, subId, experience);
         } else {
             const imageRef = ref(storage, `${temporaryImagePath}`);
             temporaryImagePath && (await deleteObject(imageRef));

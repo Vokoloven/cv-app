@@ -2,8 +2,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { fieldsHandler } from './fieldsHandler';
 import { sxFormsProps } from './sxFormsProps';
-import { TInput } from 'components/Modal/NestedModal';
-import { multilineHanlder } from './multilineHandler';
+import { TInput } from 'components/Modal/Modal';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import IconButton from '@mui/material/IconButton';
 import { sxIconButtonColor } from 'theme/sxIconButtonColor';
@@ -38,7 +37,7 @@ export const Forms = ({
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 {fieldsHandler(actionName)?.map(({ id, label }) => (
                     <TextField
-                        multiline={multilineHanlder(id)}
+                        multiline
                         key={id}
                         id={id}
                         label={label}
