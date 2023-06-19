@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from 'redux/authSlice';
 import { AddButton } from 'components/Buttons';
 import { TActionName, items, TTitle } from './items';
-import { NestedModal } from 'components/Modal/NestedModal';
+import { Modal } from 'components/Modal/Modal';
 import { PaperItems } from '.';
 import { selectData } from 'redux/getDataSlice';
 import { CustomSkeleton } from 'components/Skeleton';
@@ -96,7 +96,7 @@ export function CustomizedAccordion() {
                     )}
                 </Box>
             ))}
-            <NestedModal
+            <Modal
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 actionName={actionName}

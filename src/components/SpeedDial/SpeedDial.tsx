@@ -16,7 +16,7 @@ import { actionsHandler } from './actionsHandler';
 import { useSelector } from 'react-redux';
 import { selectTheming } from 'redux/themingSlice/selectTheming';
 import { selectAuth } from 'redux/authSlice/selectAuth';
-import { NestedModal } from 'components/Modal/NestedModal';
+import { Modal } from 'components/Modal/Modal';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { capitalize } from '@mui/material';
 import {
@@ -107,7 +107,7 @@ export function SpeedDialTooltipOpen({ side }: Pick<TAppBar, 'side'>) {
                             )
                         )}
                     </SpeedDial>
-                    <NestedModal
+                    <Modal
                         openModal={openModal}
                         setOpenModal={setOpenModal}
                         actionName={actionName}

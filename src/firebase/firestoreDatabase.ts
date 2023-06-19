@@ -9,44 +9,22 @@ import {
     deleteDoc,
 } from 'firebase/firestore';
 import { db } from 'firebase/';
-import { TInput } from 'components/Modal/NestedModal';
+import { TInput } from 'components/Modal/Modal';
 import { AppDispatch } from 'redux/store';
 import { getFirestoreDatabase } from 'redux/service';
-import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { deleteStoragePhoto } from './deleteStoragePhoto';
+import { actionNameArray, isArray } from './isArray';
+import { subExperienceUpdater } from './subExperienceUpdater';
+import { subExperienceDelete } from './subExperienceDelete';
 
 export const collectionName = import.meta.env.VITE_COLLECTION;
-
-const firebaseArray: string[] = [
-    'techSkills',
-    'softSkills',
-    'languages',
-    'projects',
-    'experience',
-    'education',
-];
-
-const isArray = (firebaseArray: string[], actionName: string | null) => {
-    const isArray = firebaseArray.some((item) => item === actionName);
-
-    return isArray;
-};
-
-const deleteStoragePhoto = async (
-    actionName: string | null,
-    path: string | null
-) => {
-    const storage = getStorage();
-
-    if (actionName === 'photo' || actionName === 'projects') {
-        const photoRef = ref(storage, `${path}`);
-        await deleteObject(photoRef);
-    }
-};
 
 export const firebaseSetDoc = async (
     actionName: string | null,
     input: TInput<string>,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
+    subId?: string | null,
+    data?: DocumentData
 ) => {
     const collectionRef = collection(db, `${collectionName}`);
     const docRef = doc(collectionRef, `${actionName}`);
@@ -55,7 +33,12 @@ export const firebaseSetDoc = async (
     const { id } = docRefDefaultId;
     const docSnap = await getDoc(docRef);
 
-    if (!isArray(firebaseArray, actionName)) {
+    if (actionName === 'subExperience' && data && subId) {
+        subExperienceUpdater(collectionRef, input, data, subId, actionName);
+        await dispatch(getFirestoreDatabase(collectionName));
+    }
+
+    if (!isArray(actionNameArray, actionName)) {
         await setDoc(docRef, { id, ...input });
     } else if (docSnap.exists()) {
         actionName &&
@@ -73,11 +56,17 @@ export const firebaseDeleteDoc = async (
     data: DocumentData | null,
     itemId: string | null,
     path: string | null,
+    index: number | null,
     dispatch: AppDispatch
 ) => {
     const collectionRef = collection(db, `${collectionName}`);
 
-    if (isArray(firebaseArray, actionName) && actionName) {
+    if (actionName === 'subExperience' && data && index !== undefined) {
+        subExperienceDelete(collectionRef, data, itemId, actionName, index);
+        await dispatch(getFirestoreDatabase(collectionName));
+    }
+
+    if (isArray(actionNameArray, actionName) && actionName) {
         const docRef = doc(collectionRef, `${actionName}`);
 
         const filteredDoc = data?.filter(
