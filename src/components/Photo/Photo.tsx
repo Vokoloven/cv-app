@@ -30,7 +30,7 @@ export const Photo = () => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteDoc('photo', null, null, path, dispatch);
+            firebaseDeleteDoc('photo', null, null, path, null, dispatch);
         }
 
         setOpen(false);

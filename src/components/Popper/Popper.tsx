@@ -42,6 +42,7 @@ export const PositionedPopper = ({ item }: TProps) => {
                 projects,
                 item?.id,
                 item?.path,
+                null,
                 dispatch
             );
         }

@@ -47,7 +47,7 @@ export const Person = ({ side }: TProps) => {
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
         if (value === 'Ok') {
-            firebaseDeleteDoc(name, null, null, null, dispatch);
+            firebaseDeleteDoc(name, null, null, null, null, dispatch);
         }
         setOpen(false);
     };
