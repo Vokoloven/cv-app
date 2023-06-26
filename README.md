@@ -22,7 +22,7 @@ Project include ignored **`.env`** file. You should to create it by yourself in 
 
 ## Stylization
 
-For stilization i used **[MUI](https://mui.com/)**.\
+For stilization i used **[MUI](https://mui.com/)**.
 
 ## Contacts
 
