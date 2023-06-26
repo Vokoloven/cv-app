@@ -15,6 +15,7 @@ import { selectData } from 'redux/getDataSlice';
 import { Spinner } from 'components/Spinner/Spinner';
 import { AlertDialogSlide } from 'components/Dialog';
 import { firebaseDeleteDoc } from 'firebase/firestoreDatabase';
+import { selectAuth } from 'redux/authSlice';
 
 export const Photo = () => {
     const [open, setOpen] = useState<boolean>(false);
@@ -23,9 +24,10 @@ export const Photo = () => {
     const path = useRequiredDoc('photo')?.path;
 
     const { loading } = useSelector(selectData);
+    const { access } = useSelector(selectAuth);
 
     const handleOpen = () => {
-        setOpen(true);
+        access === 0 && setOpen(true);
     };
 
     const handleClose = (value: 'Cancel' | 'Ok') => {
