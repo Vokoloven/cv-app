@@ -4,18 +4,18 @@ About: it's good application will help you create awesome CV and keep all time u
 
 ## Project
 
-For building project used **[Vite](https://vitejs.dev/) + ReactJs + TypeScript**\.
+For building project used **[Vite](https://vitejs.dev/) + ReactJs + TypeScript**\
 For backend used **[Firebase](https://firebase.google.com/)**
 Some basic **Project** commands are:
 
-```
-npm install - will installed dependencies
-npm run dev - start dev server
-npm run preview - locally preview production build
-npm run build - build for production
-npm run lint - check errors by lint
-```
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| npm install     | Will installed dependencies      |
+| npm run dev     | Start dev server                 |
+| npm run preview | Locally preview production build |
+| npm run build   | Build for production             |
+| npm run lint    | Check errors by lint             |
 
-**Important**.\
-For using project you need to create **`[Firebase](https://firebase.google.com/) Project`** and add **`Authentication by Google Account`, `Firestore Database`, `Storage`**.\
-Project consists `.env` file. You can find `.env.example`, your should create `.env` file in **root** folder and fill it according example.\
+**Important**\
+For using project you need to create **`Firebase Project`** and add **`Authentication by Google Account`, `Firestore Database`, `Storage`**.\
+Project consists ignored **`.env`** file. You should to create it by yourself in root folder and fill according **`.env.example`**.
