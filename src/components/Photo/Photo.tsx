@@ -80,6 +80,7 @@ export const Photo = () => {
                             ...(photo ? null : { height: 300, width: 300 }),
                         }}
                         component={'label'}
+                        disabled={access === 0 ? false : true}
                     >
                         {!photo && (
                             <input
