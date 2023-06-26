@@ -26,4 +26,4 @@ For stilization i used **[MUI](https://mui.com/)**.
 
 ## Contacts
 
-Anyway don't hesitate to contact me, you can find my contacts [Here](https://github.com/Vokoloven).
+Anyway don't hesitate to contact me, you can find my contacts [here](https://github.com/Vokoloven).
