@@ -51,8 +51,10 @@ export const PaperItems = ({ actionName }: TProps) => {
     const dispatch = useDispatch();
 
     const handleOpen = (id?: string | null, name?: string | null) => {
-        if (id && name) {
+        if (id) {
             setId(id);
+        }
+        if (name) {
             setName(name);
         }
 
@@ -185,8 +187,8 @@ export const PaperItems = ({ actionName }: TProps) => {
                     >
                         {items.map((item: TItem) => (
                             <Box
-                                component={'li'}
                                 key={item?.id}
+                                component={'li'}
                                 sx={{
                                     display: 'flex',
                                 }}
