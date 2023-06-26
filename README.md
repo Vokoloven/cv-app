@@ -9,13 +9,13 @@ For backend used **[Firebase](https://firebase.google.com/)**
 Some basic **Project** commands are:
 
 ```
-*npm install - will installed dependencies
-*npm run dev - start dev server
-*npm run preview - locally preview production build
-*npm run build - build for production
-*npm run lint - check lint errors
+npm install - will installed dependencies
+npm run dev - start dev server
+npm run preview - locally preview production build
+npm run build - build for production
+npm run lint - check errors by lint
 ```
 
-**Important**
-For using project you need to create **`Firebase Project`** and add **`Authentication by Google Account`, `Firestore Database`, `Storage`**\.
-Project consists `.env` file. You can find `.env.example`, your should create `.env` file in **root** folder and fill it according example\.
+**Important**.\
+For using project you need to create **`[Firebase](https://firebase.google.com/) Project`** and add **`Authentication by Google Account`, `Firestore Database`, `Storage`**.\
+Project consists `.env` file. You can find `.env.example`, your should create `.env` file in **root** folder and fill it according example.\
