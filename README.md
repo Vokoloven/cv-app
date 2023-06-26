@@ -18,8 +18,12 @@ Some basic **Project** commands are:
 
 **_Important_**\
 For using project you need to create **`Firebase Project`** and add **`Authentication by Google Account`, `Firestore Database`, `Storage`**.\
-Project consists ignored **`.env`** file. You should to create it by yourself in root folder and fill according **`.env.example`**.
+Project include ignored **`.env`** file. You should to create it by yourself in root folder and fill according **`.env.example`**.
+
+## Stylization
+
+For stilization i used **[MUI](https://mui.com/)**.\
 
 ## Contacts
 
-Anyway don't hesistate to conntact me any time you can find my contacts in [Here](https://github.com/Vokoloven).
+Anyway don't hesitate to contact me, you can find my contacts [Here](https://github.com/Vokoloven).
