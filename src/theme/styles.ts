@@ -1,6 +1,32 @@
-export const styles = {
+import { Theme } from '@mui/material';
+import { normalize } from 'styled-normalize';
+
+export const styles = (theme: Theme) => ({
+    ...{ normalize },
     body: {
         overflowY: 'overlay',
+    },
+    ['*']: {
+        boxSizing: 'border-box',
+        margin: 0,
+        padding: 0,
+        scrollBehavior: 'smooth',
+
+        ['::-webkit-scrollbar']: {
+            width: '6px',
+            height: '5px',
+        },
+        ['::-webkit-scrollbar-corner']: {
+            height: 0,
+        },
+        ['::-webkit-scrollbar-track']: {
+            backgroundColor: 'transparent',
+            bordeRadius: '25px',
+        },
+        ['::-webkit-scrollbar-thumb']: {
+            backgroundColor: theme.palette.primary.background.primary,
+            borderRadius: '25px',
+        },
     },
 
     h1: {
@@ -46,4 +72,4 @@ export const styles = {
         listStyle: 'none',
         padding: 0,
     },
-};
+});
