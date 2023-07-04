@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -40,6 +41,7 @@ export const PaperItems = ({ actionName }: TProps) => {
 
     const isAvailable = useRef<boolean>(false);
     const items = useRequiredDoc(actionName)?.[actionName];
+    const location = useRequiredDoc('location')?.location;
     const phone = useRequiredDoc('phone')?.phone;
     const email = useRequiredDoc('email')?.email;
     const github = useRequiredDoc('github')?.github;
@@ -71,6 +73,11 @@ export const PaperItems = ({ actionName }: TProps) => {
     };
 
     const contacts: TContacts[] = [
+        {
+            name: 'location',
+            data: location,
+            icon: <LocationOnIcon sx={sxIcon()} />,
+        },
         {
             name: 'phone',
             data: phone,
@@ -119,6 +126,8 @@ export const PaperItems = ({ actionName }: TProps) => {
                     <Typography>{data}</Typography>
                 </Box>
             );
+        } else if (name === 'location' && data) {
+            return <Typography sx={{ ml: 1 }}>{data}</Typography>;
         } else if (data) {
             return (
                 <Box

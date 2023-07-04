@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import IconButton from '@mui/material/IconButton';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import EmailIcon from '@mui/icons-material/Email';
@@ -18,6 +19,9 @@ type TProps = {
 
 const iconsHandler = (icons: TIcons, sx: TProps) => {
     switch (icons) {
+        case 'location':
+            return <LocationOnIcon sx={sx} />;
+            break;
         case 'phone':
             return <PhoneIphoneIcon sx={sx} />;
             break;

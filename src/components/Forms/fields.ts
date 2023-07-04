@@ -36,6 +36,8 @@ const educationFields: TFields = [
     { id: 'degree', label: 'Degree' },
 ];
 
+const locationFields: TFields = [{ id: 'location', label: 'Location' }];
+
 const phoneFields: TFields = [{ id: 'phone', label: 'Phone' }];
 
 const emailFields: TFields = [{ id: 'email', label: 'Email' }];
@@ -55,6 +57,7 @@ const languagesFields: TFields = [{ id: 'languages', label: 'Languages' }];
 const cvFields: TFields = [{ id: 'cv', label: 'CV' }];
 
 export const dataFields: { name: string; fields: TFields }[] = [
+    { name: 'location', fields: locationFields },
     { name: 'name', fields: nameFields },
     { name: 'summary', fields: summaryFields },
     { name: 'projects', fields: projectsFields },
