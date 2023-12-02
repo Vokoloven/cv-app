@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { CustomCard } from 'components/Card';
 import { CustomSkeleton } from 'components/Skeleton';
 import { skeleton } from './skeletonProps';
+import { reversedItems } from 'utils';
 
 export type TItem = {
     projectName: string;
@@ -52,12 +53,11 @@ export const ProjectsItems = () => {
                             />
                         </Grid>
                     ))}
-                {items?.length > 0 &&
-                    items.map((item: TItem) => (
-                        <Grid mobile={2} tablet={4} laptop={4} key={item?.id}>
-                            <CustomCard item={item} />
-                        </Grid>
-                    ))}
+                {reversedItems(items)?.map((item: TItem) => (
+                    <Grid mobile={2} tablet={4} laptop={4} key={item?.id}>
+                        <CustomCard item={item} />
+                    </Grid>
+                ))}
             </Grid>
         </Box>
     );
