@@ -34,9 +34,7 @@ export const BannerItems = ({ actionName }: TProps) => {
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const items = useRequiredDoc(actionName.toLowerCase())?.[
-        actionName.toLowerCase()
-    ];
+    const items = useRequiredDoc(actionName)?.[actionName];
     const { uploadButton } = useSelector(selectTheming);
     const { access } = useSelector(selectAuth);
 
