@@ -124,7 +124,7 @@ export const BannerItems = ({ actionName }: TProps) => {
         } else if (actionName === 'experience') {
             return (
                 !!items &&
-                items.map(
+                [...items].reverse().map(
                     ({ id, title, period, subExperience }: DocumentData) => (
                         <Box sx={sxItems()} key={id}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
